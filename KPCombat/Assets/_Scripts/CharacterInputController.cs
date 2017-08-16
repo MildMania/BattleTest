@@ -19,15 +19,28 @@ public class CharacterInputController : MonoBehaviour {
             OnInput(inputType);
     }
 
-    private void Update()
+    private void Awake()
     {
-        CheckInput();
+        StartListeningEvents();
     }
 
-    void CheckInput()
+    private void OnDestroy()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-            FireOnInput(InputEnum.Attack);
+        StopListeningEvents();
+    }
 
+    void StartListeningEvents()
+    {
+        KeyboardManager.AddListener(KeyCode.A, KeyState.Down, OnAttackPressed);
+    }
+
+    void StopListeningEvents()
+    {
+        KeyboardManager.RemoveListener(KeyCode.A, KeyState.Down, OnAttackPressed);
+    }
+
+    void OnAttackPressed()
+    {
+        FireOnInput(InputEnum.Attack);
     }
 }
