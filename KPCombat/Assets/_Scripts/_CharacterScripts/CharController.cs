@@ -2,18 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharController : MonoBehaviour
+public class CharController : MMGameSceneBehaviour
 {
     public FSMController FSMController;
 
-    private void Awake()
+    protected override void StartListeningEvents()
     {
-        KeyboardManager.AddListener(KeyCode.S, KeyState.Down, OnGameStarted);
+        base.StartListeningEvents();
+
+        KeyboardManager.AddListener(KeyCode.S, KeyState.Down, StartGameButtonPressed);
     }
 
-    void OnGameStarted()
+    void StartGameButtonPressed()
     {
-        KeyboardManager.RemoveListener(KeyCode.S, KeyState.Down, OnGameStarted);
+        KeyboardManager.RemoveListener(KeyCode.S, KeyState.Down, StartGameButtonPressed);
+
+        GameManager.Instance.StartGame();
+    }
+
+    protected override void OnGameStarted()
+    {
+        base.OnGameStarted();
 
         FSMController.SetTransition(FSMStateID.MOVE);
     }

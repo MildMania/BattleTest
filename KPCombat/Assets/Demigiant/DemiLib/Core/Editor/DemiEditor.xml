@@ -47,22 +47,11 @@
             </summary>
             <param name="adbPath">Path, relative to Unity's project folder</param>
         </member>
-        <member name="M:DG.DemiEditor.DeEditorFileUtils.IsValidFileName(System.String,System.Int32)">
+        <member name="M:DG.DemiEditor.DeEditorFileUtils.ConvertToValidFilename(System.String)">
             <summary>
-            Validates the string as a valid fileName
-            (uses commonly accepted characters an all systems instead of system-specific ones).<para/>
-            BEWARE: doesn't check for reserved words
+            Converts the given string to a valid filename and returns it.
+            Beware: doesn't check for reserved words
             </summary>
-            <param name="s">string to replace</param>
-            <param name="minLength">Minimum length for considering the string valid</param>
-        </member>
-        <member name="M:DG.DemiEditor.DeEditorFileUtils.ConvertToValidFilename(System.String,System.Char)">
-            <summary>
-            Returns the given string stripped of any invalid filename characters.<para/>
-            BEWARE: doesn't check for reserved words
-            </summary>
-            <param name="s">string to replace</param>
-            <param name="replaceWith">Character to use as replacement for invalid ones</param>
         </member>
         <member name="M:DG.DemiEditor.DeEditorFileUtils.GUIDToExistingAssetPath(System.String)">
             <summary>
@@ -260,7 +249,7 @@
             <param name="draggedItemIndex">DraggableList index of the item being dragged</param>
             <param name="optionalData">Optional data that can be retrieved via the <see cref="P:DG.DemiEditor.DeGUIDrag.optionalDragData"/> static property</param>
         </member>
-        <member name="M:DG.DemiEditor.DeGUIDrag.Drag(System.Int32,System.Collections.IList,System.Int32,System.Nullable{UnityEngine.Rect})">
+        <member name="M:DG.DemiEditor.DeGUIDrag.Drag(System.Int32,System.Collections.IList,System.Int32)">
             <summary>
             Call this after each draggable GUI block, to calculate and draw the current drag state
             (or complete it if the mouse was released).
@@ -268,10 +257,8 @@
             <param name="dragId">ID for this drag operation (must be the same for both StartDrag and Drag</param>
             <param name="draggableList">List containing the draggable item and all other relative draggable items</param>
             <param name="currDraggableItemIndex">Current index of the draggable item being drawn</param>
-            <param name="lastGUIRect">If NULL will calculate this automatically using <see cref="M:UnityEngine.GUILayoutUtility.GetLastRect"/>.
-            Pass this if you're creating a drag between elements that don't use GUILayout</param>
         </member>
-        <member name="M:DG.DemiEditor.DeGUIDrag.Drag(System.Int32,System.Collections.IList,System.Int32,UnityEngine.Color,System.Nullable{UnityEngine.Rect})">
+        <member name="M:DG.DemiEditor.DeGUIDrag.Drag(System.Int32,System.Collections.IList,System.Int32,UnityEngine.Color)">
             <summary>
             Call this after each draggable GUI block, to calculate and draw the current drag state
             (or complete it if the mouse was released).
@@ -280,8 +267,6 @@
             <param name="draggableList">List containing the draggable item and all other relative draggable items</param>
             <param name="currDraggableItemIndex">Current index of the draggable item being drawn</param>
             <param name="dragEvidenceColor">Color to use for drag divider and selection</param>
-            <param name="lastGUIRect">If NULL will calculate this automatically using <see cref="M:UnityEngine.GUILayoutUtility.GetLastRect"/>.
-            Pass this if you're creating a drag between elements that don't use GUILayout</param>
         </member>
         <member name="M:DG.DemiEditor.DeGUIDrag.EndDrag(System.Boolean)">
             <summary>
@@ -303,72 +288,15 @@
         <member name="M:DG.DemiEditor.DeGUINodeSystem.ABSDeGUINode.OnGUI(DG.DemiEditor.DeGUINodeSystem.NodeGUIData,DG.DemiLib.IEditorGUINode)">
             <summary>Called only if the node is visible in the current area</summary>
         </member>
-        <member name="F:DG.DemiEditor.DeGUINodeSystem.ConnectionMode.Flexible">
-            <summary>
-            The connectedNodesIds list will be automatically increased/decreased when adding/removing connections
-            (otherwise connectedNodesIds will have to be increased via custom code)
-            </summary>
-        </member>
-        <member name="F:DG.DemiEditor.DeGUINodeSystem.ConnectionMode.Dual">
-            <summary>
-            Requires only two connectedNodesIds (no more, no less), 
-            uses regular CTRL+Drag to connect connection 0, CTRL+SPACE+Drag to connect connection 1
-            </summary>
-        </member>
-        <member name="T:DG.DemiEditor.DeGUINodeSystem.Core.NodesClipboard">
-            <summary>
-            Stores cloned nodes for pasting
-            </summary>
-        </member>
-        <member name="M:DG.DemiEditor.DeGUINodeSystem.Core.NodesClipboard.GetNodesToPaste``1">
-            <summary>
-            Returns a list of pasteable nodes, with their GUID recreated and their connections adapted
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:DG.DemiEditor.DeGUINodeSystem.Core.NodesClipboard.CloneNode``1(DG.DemiLib.IEditorGUINode)">
-            <summary>
-            Returns a clone of the given node (clones also lists, but leaves other references as references).
-            A new ID will be automatically generated.
-            </summary>
-        </member>
         <member name="T:DG.DemiEditor.DeGUINodeSystem.Core.Connector">
             <summary>
             Always connects a node from BottomOrRight side to TopOrLeft side
             </summary>
         </member>
-        <member name="M:DG.DemiEditor.DeGUINodeSystem.Core.Connector.Connect(DG.DemiEditor.DeGUINodeSystem.NodeProcess,System.Int32,System.Int32,DG.DemiEditor.DeGUINodeSystem.NodeConnectionOptions,DG.DemiLib.IEditorGUINode,DG.DemiLib.IEditorGUINode)">
+        <member name="M:DG.DemiEditor.DeGUINodeSystem.Core.Connector.Connect(DG.DemiEditor.DeGUINodeSystem.NodeProcess,System.Int32,System.Int32,DG.DemiEditor.DeGUINodeSystem.NodeGUIData,DG.DemiEditor.DeGUINodeSystem.NodeConnectionOptions,DG.DemiEditor.DeGUINodeSystem.NodeGUIData)">
             <summary>
-            Always connects from BottomOrRight side to TopOrLeft side.
-            If ALT is pressed shows the delete connection button.
-            Called during Repaint or MouseDown/Up.
-            Returns TRUE if the connection was deleted using the delete connection button.
+            Always connects from BottomOrRight side to TopOrLeft side
             </summary>
-        </member>
-        <member name="T:DG.DemiEditor.DeGUINodeSystem.HelpPanel">
-            <summary>
-            You can attach to this
-            </summary>
-        </member>
-        <member name="M:DG.DemiEditor.DeGUINodeSystem.HelpPanel.AddContentGroup(System.String,System.String)">
-            <summary>
-            Use this to add a content group to the Help Panel
-            </summary>
-        </member>
-        <member name="M:DG.DemiEditor.DeGUINodeSystem.HelpPanel.ContentGroup.AppendDefinition(System.String)">
-            <summary>
-            Add definition. Supports rich-text but also these special tags:<para/>
-            - [b][/b]
-            </summary>
-        </member>
-        <member name="M:DG.DemiEditor.DeGUINodeSystem.HelpPanel.Definition.AddKey(System.String,System.Boolean)">
-            <summary>
-            Add key, automatically formatting these special keys:<para/>
-            /<para/>
-            +<para/>
-            →
-            </summary>
-            <param name="newLine">If TRUE and there's other keys/targets, adds the new key on a new line preceded by a comma</param>
         </member>
         <member name="T:DG.DemiEditor.DeGUINodeSystem.InteractionManager">
             <summary>
@@ -379,6 +307,12 @@
         <member name="M:DG.DemiEditor.DeGUINodeSystem.InteractionManager.IsDragging(DG.DemiLib.IEditorGUINode)">
             <summary>Returns TRUE if the given node is currently being dragged</summary>
         </member>
+        <member name="M:DG.DemiEditor.DeGUINodeSystem.InteractionManager.HasControlKeyModifier">
+            <summary>
+            Returns TRUE if the control key should be considered valid for this operation
+            (returns TRUE even if it was released within a given timespan)
+            </summary>
+        </member>
         <member name="M:DG.DemiEditor.DeGUINodeSystem.InteractionManager.Update">
             <summary>
             Returns TRUE if a repaint is required
@@ -388,14 +322,11 @@
         <member name="T:DG.DemiEditor.DeGUINodeSystem.NodeProcess">
             <summary>
             Main class for DeGUI Node system.
-            Create it, then enclose your GUI node calls inside a <see cref="!:NodeProcessScope"/>.<para/>
+            Create it, then enclose your GUI node calls inside a <see cref="T:DG.DemiEditor.DeGUINodeSystem.NodeProcessScope"/>.<para/>
             CODING ORDER:<para/>
             - Create a <see cref="T:DG.DemiEditor.DeGUINodeSystem.NodeProcess"/> to use for your node system (create it once, obviously)<para/>
-            - Inside OnGUI, write all your nodes GUI code inside a <see cref="!:NodeProcessScope"/>
+            - Inside OnGUI, write all your nodes GUI code inside a <see cref="T:DG.DemiEditor.DeGUINodeSystem.NodeProcessScope"/>
             </summary>
-        </member>
-        <member name="F:DG.DemiEditor.DeGUINodeSystem.NodeProcess.SnapOffset">
-            <summary>Distance at which nodes will be placed when snapping next to each other</summary>
         </member>
         <member name="P:DG.DemiEditor.DeGUINodeSystem.NodeProcess.position">
             <summary>Full area without zeroed coordinates</summary>
@@ -403,28 +334,11 @@
         <member name="P:DG.DemiEditor.DeGUINodeSystem.NodeProcess.relativeArea">
             <summary>Position with zeroed coordinates (used by all node GUI since it's inside a GUILayout(area))</summary>
         </member>
-        <member name="M:DG.DemiEditor.DeGUINodeSystem.NodeProcess.#ctor(UnityEditor.EditorWindow,System.Func{System.Collections.Generic.List{DG.DemiLib.IEditorGUINode},System.Boolean},System.Func{DG.DemiLib.IEditorGUINode,DG.DemiLib.IEditorGUINode,System.Boolean})">
+        <member name="M:DG.DemiEditor.DeGUINodeSystem.NodeProcess.#ctor(UnityEditor.EditorWindow)">
             <summary>
             Creates a new NodeProcess.
             </summary>
             <param name="editor">EditorWindow for this process</param>
-            <param name="onDeleteNodesCallback">Callback called when one or more nodes are going to be deleted.
-            Return FALSE if you want the deletion to be canceled.
-            Can be NULL, in which case it will be ignored</param>
-            <param name="onCloneNodeCallback">Callback called when a node is cloned.
-            Return FALSE if you want the cloning to be canceled.
-            Can be NULL, in which case it will be ignored</param>
-        </member>
-        <member name="M:DG.DemiEditor.DeGUINodeSystem.NodeProcess.Reset">
-            <summary>
-            Needs to be called when loading a complete new series of nodes
-            </summary>
-        </member>
-        <member name="M:DG.DemiEditor.DeGUINodeSystem.NodeProcess.RepaintOnEnd">
-            <summary>
-            Tells the process to repaint once the process has ended.
-            Calling this
-            </summary>
         </member>
         <member name="M:DG.DemiEditor.DeGUINodeSystem.NodeProcess.Draw``1(DG.DemiLib.IEditorGUINode,System.Nullable{DG.DemiEditor.DeGUINodeSystem.NodeConnectionOptions})">
             <summary>
@@ -432,67 +346,33 @@
             Retuns the full area of the node
             </summary>
         </member>
-        <member name="M:DG.DemiEditor.DeGUINodeSystem.NodeProcess.OpenHelpPanel">
-            <summary>
-            Opens the Help Panel
-            </summary>
-        </member>
-        <member name="M:DG.DemiEditor.DeGUINodeSystem.NodeProcess.CloseHelpPanel">
-            <summary>
-            Closes the Help Panel
-            </summary>
-        </member>
-        <member name="M:DG.DemiEditor.DeGUINodeSystem.NodeProcess.ToggleHelpPanel">
-            <summary>
-            Opens or closes the Help panel based on its current state
-            </summary>
-        </member>
         <member name="M:DG.DemiEditor.DeGUINodeSystem.NodeProcessScope`1.#ctor(DG.DemiEditor.DeGUINodeSystem.NodeProcess,UnityEngine.Rect,UnityEngine.Vector2@,System.Collections.Generic.IList{`0})">
             <summary>
             Use this to encapsulate node GUI operations.<para/>
-            Automatically manages various operations (press F1 to see them).<para/>
-            Sets <code>GUI.changed</code> to TRUE if the area is panned, a node is dragged, controlNodes change sorting or are deleted.<para/>
-            Wraps all content inside a GUILayout Area (nodeArea).
+            Automatically manages area drag operations with middle mouse and node drag operations with left mouse.<para/>
+            Sets <code>GUI.changed</code> to TRUE if the area is panned, a node is dragged, or sortableNodes changes sorting.<para/>
+            Wraps all content inside a GUILayout.BeginArea(nodeArea).
             </summary>
             <param name="process">The <see cref="T:DG.DemiEditor.DeGUINodeSystem.NodeProcess"/> to use</param>
             <param name="nodeArea">Area within which the nodes will be drawn</param>
             <param name="refAreaShift">Area shift (caused by dragging)</param>
-            <param name="controlNodes">This list will be sorted based on current node draw order,
-            and changed in case one of its nodes is deleted.<para/>
-            <code>IMPORTANT:</code> this list should be part of your serialized class (MonoBehaviour or ScriptableObject),
-            so it will be stored as a reference and modifying one will modify the other.<para/>
-            Usually you want to pass all nodes to this except the eventual start node (or nodes that can't be sorted nor deleted).</param>
+            <param name="sortableNodes">This list will be sorted based on current node draw order</param>
         </member>
-        <member name="P:DG.DemiEditor.DeGUINodeSystem.SelectionManager.focusedNode">
+        <member name="M:DG.DemiEditor.DeGUINodeSystem.NodeProcessScope.#ctor(DG.DemiEditor.DeGUINodeSystem.NodeProcess,UnityEngine.Rect,UnityEngine.Vector2@)">
             <summary>
-            Set automatically when a selection ends up selecting a single node,
-            reset when deselecting all nodes, selecting multiple nodes, or resetting the <see cref="T:DG.DemiEditor.DeGUINodeSystem.NodeProcess"/>
+            Use this to encapsulate node GUI operations.<para/>
+            Automatically manages area drag operations with middle mouse and node drag operations with left mouse.<para/>
+            Sets <code>GUI.changed</code> to TRUE if the area is panned or a node is dragged.
             </summary>
+            <param name="process">The <see cref="T:DG.DemiEditor.DeGUINodeSystem.NodeProcess"/> to use</param>
+            <param name="nodeArea">Area within which the nodes will be drawn</param>
+            <param name="refAreaShift">Area shift (caused by dragging)</param>
         </member>
         <member name="M:DG.DemiEditor.DeGUINodeSystem.SelectionManager.DeselectAll">
             <summary>
             Returns TRUE if something was actually deselected, FALSE if there were no selected nodes
             </summary>
             <returns></returns>
-        </member>
-        <member name="T:DG.DemiEditor.DeGUIKey">
-            <summary>
-            Returns key modifiers currently pressed.
-            Requires to be updated at the beginning of every GUI call.
-            </summary>
-        </member>
-        <member name="M:DG.DemiEditor.DeGUIKey.Refresh(System.String)">
-            <summary>
-            Call this method to update data required by softCtrl calculations.
-            Automatically called from within a <see cref="T:DG.DemiEditor.DeGUINodeSystem.NodeProcessScope`1"/>.<para/>
-            Returns a <see cref="T:DG.DemiEditor.DeGUIKey.KeysRefreshResult"/> object with the keys that were just pressed and just released
-            </summary>
-            <param name="id">Required to have the correct <see cref="T:DG.DemiEditor.DeGUIKey.KeysRefreshResult"/> for the given target call</param>
-        </member>
-        <member name="M:DG.DemiEditor.DeGUIKey.ToInt(UnityEngine.KeyCode)">
-            <summary>
-            Returns the given <see cref="T:UnityEngine.KeyCode"/> as an int, or -1 if it's not a number
-            </summary>
         </member>
         <member name="T:DG.DemiEditor.DeSkinStyle">
             <summary>
@@ -945,16 +825,6 @@
         <member name="M:DG.DemiEditor.DeGUI.SetGUIColors(System.Nullable{UnityEngine.Color},System.Nullable{UnityEngine.Color},System.Nullable{UnityEngine.Color})">
             <summary>
             Sets the GUI colors to the given ones
-            </summary>
-        </member>
-        <member name="T:DG.DemiEditor.DeGUI.CursorColorScope">
-            <summary>
-            Sets the GUI cursor color to the given ones
-            </summary>
-        </member>
-        <member name="T:DG.DemiEditor.DeGUI.MatrixScope">
-            <summary>
-            Sets the GUI matrix to the given ones
             </summary>
         </member>
         <member name="M:DG.DemiEditor.DeGUI.ShadedButton(UnityEngine.Rect,UnityEngine.Color,System.String)">

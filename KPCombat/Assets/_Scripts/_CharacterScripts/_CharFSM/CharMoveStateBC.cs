@@ -6,6 +6,7 @@ using UnityEngine;
 public class CharMoveStateBC : FSMBehaviourController
 {
     public RunBehaviour Runbehaviour;
+    public AnimationBehaviour AnimationBehaviour;
 
     public Vector2 MoveDirection;
     public float MoveSpeed;
@@ -23,6 +24,8 @@ public class CharMoveStateBC : FSMBehaviourController
         Runbehaviour.RunSpeed = MoveSpeed;
 
         Runbehaviour.StartMovement();
+
+        AnimationBehaviour.PlayAnimation((int)CharacterAnimEnum.Walk, true);
     }
 
     public override void Stop()
@@ -30,5 +33,7 @@ public class CharMoveStateBC : FSMBehaviourController
         base.Stop();
 
         Runbehaviour.Stop();
+
+        AnimationBehaviour.Stop();
     }
 }
