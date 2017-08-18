@@ -39,4 +39,9 @@ public class CharacterInputController : MMGameSceneBehaviour {
     {
         FireOnInput(InputEnum.Attack);
     }
+
+    private void Update()
+    {
+        //FireOnInput(InputEnum.Attack);
+    }
 }

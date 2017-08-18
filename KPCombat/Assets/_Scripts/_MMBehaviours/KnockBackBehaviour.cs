@@ -52,6 +52,8 @@ public class KnockBackBehaviour : MMBehaviour
 
     IEnumerator KnockBackProgress()
     {
+        Debug.Log("knock back amount: " + KnockBackGridCount);
+
         Vector3 targetPos = GetKnockBackPosition();
 
         float duration = GetKnockBackDuration();

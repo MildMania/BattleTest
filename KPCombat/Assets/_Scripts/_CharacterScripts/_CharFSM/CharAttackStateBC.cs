@@ -7,27 +7,42 @@ using UnityEngine;
 [System.Serializable]
 public class CharAttackInfo
 {
-    public float AttackDuration;
-    public float MoveSpeed;
-    public string StateName;
+    public float BaseDamage;
+    public CharacterAnimEnum AnimEnum;
+    public string AttackColliderStateName;
     public float KnockBackAmount;
+    public AnimationCurve AnimationCurve;
+    public Vector2 MoveDistance;
+    public float MovementDuration;
 }
 
 
 public class CharAttackStateBC : FSMBehaviourController
 {
-    public FSMController FSMController;
+    #region Events
+
+    public Action OnAttackFinished;
+
+    void FireOnAttackFinished()
+    {
+        if (OnAttackFinished != null)
+            OnAttackFinished();
+    }
+
+    #endregion
+
+    public FSMTransitionBehaviour FSMTransition;
+    public AnimationBehaviour Animationbehaviour;
+    public AnimationBasedMovementBehaviour MovementBehaviour;
+
+    public MMBasicAnimController AttackCollderAnimController;
 
     public float AttackResetDuration;
 
-    public RunBehaviour RunBehaviour;
-    public Vector2 MoveDirection;
-
     public List<CharAttackInfo> AttackInfoList;
-    CharAttackInfo _curAttackInfo;
-    int _curAttackInfoIndex;
+    public CharAttackInfo CurAttackInfo { get; private set; }
+    public int CurAttackInfoIndex { get; private set; }
 
-    IEnumerator _attackRoutine;
     IEnumerator _resetAttackRoutine;
 
     protected override void InitFSMBC()
@@ -41,40 +56,30 @@ public class CharAttackStateBC : FSMBehaviourController
     {
         base.Execute();
 
-        RunBehaviour.HeadDirection = MoveDirection;
-        RunBehaviour.RunSpeed = _curAttackInfo.MoveSpeed;
+        Animationbehaviour.PlayAnimation((int)CurAttackInfo.AnimEnum).OnComplete(OnAnimComplete);
 
-        RunBehaviour.StartMovement();
+        MovementBehaviour.AnimationCurve = CurAttackInfo.AnimationCurve;
+        MovementBehaviour.MovementDuration = CurAttackInfo.MovementDuration;
+        MovementBehaviour.MovementDistance = CurAttackInfo.MoveDistance;
+
+        MovementBehaviour.Move();
+
+        AttackCollderAnimController.PlayAnimation(CurAttackInfo.AttackColliderStateName);
 
         if (_resetAttackRoutine != null)
             StopCoroutine(_resetAttackRoutine);
-
-        _attackRoutine = AttackProgress();
-        StartCoroutine(_attackRoutine);
     }
 
-    IEnumerator AttackProgress()
+    void OnAnimComplete()
     {
-        yield return new WaitForSeconds(_curAttackInfo.AttackDuration);
-
         _resetAttackRoutine = WaitForAttackReset();
         StartCoroutine(_resetAttackRoutine);
 
-        RunBehaviour.Stop();
-
-        FSMController.SetTransition(FSMStateID.MOVE);
-
         FireOnExecutionCompleted();
-    }
 
-    public override void Stop()
-    {
-        base.Stop();
+        FireOnAttackFinished();
 
-        RunBehaviour.Stop();
-
-        if (_attackRoutine != null)
-            StopCoroutine(_attackRoutine);
+        UpdateAttackInfo();
     }
 
     IEnumerator WaitForAttackReset()
@@ -86,13 +91,21 @@ public class CharAttackStateBC : FSMBehaviourController
 
     void UpdateAttackInfo()
     {
-        _curAttackInfoIndex++;
-        _curAttackInfo = AttackInfoList[_curAttackInfoIndex];
+        CurAttackInfoIndex++;
+
+        if (CurAttackInfoIndex == AttackInfoList.Count)
+        {
+            ResetAttackInfo();
+
+            return;
+        }
+
+        CurAttackInfo = AttackInfoList[CurAttackInfoIndex];
     }
 
     void ResetAttackInfo()
     {
-        _curAttackInfo = AttackInfoList[0];
-        _curAttackInfoIndex = 0;
+        CurAttackInfo = AttackInfoList[0];
+        CurAttackInfoIndex = 0;
     }
 }

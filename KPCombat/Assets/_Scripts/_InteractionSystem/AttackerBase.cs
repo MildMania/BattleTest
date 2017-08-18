@@ -13,14 +13,6 @@ public class AttackerBase : Interaction
 
     #region Events
 
-    public Action<DamagableBase, AttackInteractionInfo> OnAttackReflected;
-
-    void FireOnAttackReflected(DamagableBase damagable, AttackInteractionInfo attackInfo)
-    {
-        if (OnAttackReflected != null)
-            OnAttackReflected(damagable, attackInfo);
-    }
-
     public Action<DamagableBase, AttackInteractionInfo> OnDamageGiven;
 
     void FireOnDamageGiven(DamagableBase damagable, AttackInteractionInfo attackInfo)

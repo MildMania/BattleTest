@@ -10,6 +10,8 @@ public enum FSMStateID
     MOVE,
     MELEE_CHARGE,
     MELEE_ATTACK,
+    TOOK_DAMAGE,
     KNOCK_BACK,
+    RECOVER,
     DEAD,
 }

@@ -69,7 +69,11 @@ public class DamagableBase : Reaction
     {
         CurAttackInfo = (AttackInteractionInfo)CurInteractionInfo;
 
-        if(CurAttackInfo.IsDamageGiven)
+        if (IsDebugEnabled)
+            Debug.Log("<color=red>Damage Taken: " + CurAttackInfo.DamageAmount + "</color>");
+
+
+        if (CurAttackInfo.IsDamageGiven)
 			DamageTaken(CurAttackInfo);
 
         ReactionCompleted();
