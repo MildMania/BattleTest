@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -770,9 +770,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14075ecda30f6fa468b3232e8a3007a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsInteractionActiveOnStart: 1
+  IsInteractionActiveOnStart: 0
   InteractWithNewTarget: 1
-  IsDebugActive: 0
+  IsDebugActive: 1
 --- !u!114 &340937272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1142,6 +1142,8 @@ MonoBehaviour:
   MovementBehaviour: {fileID: 53978115}
   AttackCollderAnimController: {fileID: 896099077}
   AttackResetDuration: 0.2
+  Pusher: {fileID: 411960955}
+  Pushable: {fileID: 146775613}
   AttackInfoList:
   - BaseDamage: 2
     AnimEnum: 3
@@ -1200,7 +1202,7 @@ MonoBehaviour:
     AttackDirection: 3
     AttackType: 2
     AttackColliderStateName: ATTACK3
-    KnockBackAmount: 2
+    KnockBackAmount: 1.5
     AnimationCurve:
       serializedVersion: 2
       m_Curve:
@@ -1211,16 +1213,22 @@ MonoBehaviour:
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        time: 0.43090427
+        value: 0.9985083
+        inSlope: 5.442202
+        outSlope: 5.442202
+        tangentMode: 1
+      - serializedVersion: 2
+        time: 1.0009027
+        value: 1.0091314
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
     MoveDistance: {x: 0, y: 1}
-    MovementDuration: 0.5
+    MovementDuration: 0.9
 --- !u!1 &549726785
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,7 +1402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed1aeb8aef383c4584abc2efe3cd303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsReactionActiveOnStart: 1
+  IsReactionActiveOnStart: 0
   IsDebugEnabled: 0
 --- !u!114 &631681254
 MonoBehaviour:
@@ -2232,6 +2240,8 @@ MonoBehaviour:
   KnockBackBehaviour: {fileID: 1944047346}
   FSMTransitionBehaviour: {fileID: 1944047348}
   AnimBehaviour: {fileID: 1944047350}
+  Pusher: {fileID: 340937271}
+  Pushable: {fileID: 631681253}
 --- !u!1 &1262325213
 GameObject:
   m_ObjectHideFlags: 0

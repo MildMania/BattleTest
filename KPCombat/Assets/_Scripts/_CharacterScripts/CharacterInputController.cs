@@ -111,7 +111,8 @@ public class CharacterInputController : MMGameSceneBehaviour {
     {
         FSMStateID battleStateID = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
 
-        if (battleStateID == FSMStateID.MELEE_CHARGE)
+        if (battleStateID != FSMStateID.MELEE_ATTACK
+            && battleStateID != FSMStateID.IDLE)
             FireOnInput(InputEnum.Attack);
     }
 }

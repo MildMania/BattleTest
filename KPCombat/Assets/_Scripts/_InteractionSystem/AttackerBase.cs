@@ -48,9 +48,6 @@ public class AttackerBase : Interaction
         _battleResult = new BattleResult(this, (DamagableBase)target);
 
         BattleCalculator.CalculateBattleResult(ref _battleResult);
-		
-        if (IsDebugActive)
-			Debug.Log("result damage: " + _battleResult.DamageAmount);
 
         object message = _battleResult;
 

@@ -139,9 +139,6 @@ public abstract class Interaction : MMGameSceneBehaviour
 			ReadyToInteract();
 		}
 
-		if (IsDebugActive)
-			Debug.Log("target count: " + _targetReactionList.Count);
-
 		if (InteractWithNewTarget)
             InteractWithInteractable(_newTarget);
         

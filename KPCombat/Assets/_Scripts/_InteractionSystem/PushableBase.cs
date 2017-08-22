@@ -24,5 +24,8 @@ public class PushableBase : Reaction
         CurPushInfo = (PushInteractionInfo)CurInteractionInfo;
 
         ReactionCompleted();
+
+        if(IsDebugEnabled)
+            Debug.Log("pushed: " + CurPushInfo.PushAmount);
     }
 }

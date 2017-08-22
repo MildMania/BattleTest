@@ -6,19 +6,31 @@ public class EnemyKnockBackBC : KnockBackStateBC
 {
     public AnimationBehaviour AnimBehaviour;
 
+    public PusherBase Pusher;
+    public PushableBase Pushable;
+
     public EnemyAnimEnum KnockBackAnimation { get; set; }
 
     public override void Execute()
     {
         base.Execute();
 
-        KnockBackBehaviour.KnockBack();
-
         AnimBehaviour.PlayAnimation((int)KnockBackAnimation).OnComplete(OnKnockBackAnimationCompleted);
+    }
+
+    protected override void OnKnockBackComplete()
+    {
+        base.OnKnockBackComplete();
+
+        Pusher.IsInteractionActive = true;
+        Pushable.IsReactionActive = true;
     }
 
     void OnKnockBackAnimationCompleted()
     {
+        Pusher.IsInteractionActive = false;
+        Pushable.IsReactionActive = false;
+
         FSMTransitionBehaviour.DOFSMTransition(FSMStateID.MOVE);
 
         FireOnExecutionCompleted();
@@ -26,6 +38,9 @@ public class EnemyKnockBackBC : KnockBackStateBC
 
     public override void Exit()
     {
+        Pusher.IsInteractionActive = false;
+        Pushable.IsReactionActive = false;
+
         base.Exit();
 
         AnimBehaviour.UnRegisterOnComplete(OnKnockBackAnimationCompleted);

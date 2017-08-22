@@ -52,6 +52,9 @@ public class CharAttackStateBC : FSMBehaviourController
 
     public float AttackResetDuration;
 
+    public PusherBase Pusher;
+    public PushableBase Pushable;
+
     public List<CharAttackInfo> AttackInfoList;
     public CharAttackInfo CurAttackInfo { get; private set; }
     public int CurAttackInfoIndex { get; private set; }
@@ -71,15 +74,18 @@ public class CharAttackStateBC : FSMBehaviourController
     {
         base.Execute();
 
+        Pusher.IsInteractionActive = false;
+        Pushable.IsReactionActive = false;
+
         _completedSuccessfully = false;
 
-        Animationbehaviour.PlayAnimation((int)CurAttackInfo.AnimEnum).OnComplete(OnAnimComplete);
+        Animationbehaviour.PlayAnimation((int)CurAttackInfo.AnimEnum);
 
         MovementBehaviour.AnimationCurve = CurAttackInfo.AnimationCurve;
         MovementBehaviour.MovementDuration = CurAttackInfo.MovementDuration;
         MovementBehaviour.MovementDistance = CurAttackInfo.MoveDistance;
 
-        MovementBehaviour.Move();
+        MovementBehaviour.Move().OnComplete(OnMovementCompleted);
 
         AttackCollderAnimController.PlayAnimation(CurAttackInfo.AttackColliderStateName);
 
@@ -87,7 +93,7 @@ public class CharAttackStateBC : FSMBehaviourController
             StopCoroutine(_resetAttackRoutine);
     }
 
-    void OnAnimComplete()
+    void OnMovementCompleted()
     {
         _completedSuccessfully = true;
 
@@ -103,6 +109,9 @@ public class CharAttackStateBC : FSMBehaviourController
 
     public override void Exit()
     {
+        Pusher.IsInteractionActive = true;
+        Pushable.IsReactionActive = true;
+
         if (!_completedSuccessfully)
             FireOnAttackInterrupted();
 
