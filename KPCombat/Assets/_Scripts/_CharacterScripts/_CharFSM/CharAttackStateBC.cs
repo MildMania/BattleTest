@@ -9,6 +9,8 @@ public class CharAttackInfo
 {
     public float BaseDamage;
     public CharacterAnimEnum AnimEnum;
+    public DirectionEnum AttackDirection;
+    public AttackTypeEnum AttackType;
     public string AttackColliderStateName;
     public float KnockBackAmount;
     public AnimationCurve AnimationCurve;
@@ -27,8 +29,19 @@ public class CharAttackStateBC : FSMBehaviourController
     {
         if (OnAttackFinished != null)
             OnAttackFinished();
+
+        //Debug.Log("<color=green>Attack Completed</color>");
     }
 
+    public Action OnAttackInterrupted;
+
+    void FireOnAttackInterrupted()
+    {
+        if (OnAttackInterrupted != null)
+            OnAttackInterrupted();
+
+        //Debug.Log("<color=red>Attack Interrupted</color>");
+    }
     #endregion
 
     public FSMTransitionBehaviour FSMTransition;
@@ -45,6 +58,8 @@ public class CharAttackStateBC : FSMBehaviourController
 
     IEnumerator _resetAttackRoutine;
 
+    bool _completedSuccessfully;
+
     protected override void InitFSMBC()
     {
         StateID = FSMStateID.MELEE_ATTACK;
@@ -55,6 +70,8 @@ public class CharAttackStateBC : FSMBehaviourController
     public override void Execute()
     {
         base.Execute();
+
+        _completedSuccessfully = false;
 
         Animationbehaviour.PlayAnimation((int)CurAttackInfo.AnimEnum).OnComplete(OnAnimComplete);
 
@@ -72,6 +89,8 @@ public class CharAttackStateBC : FSMBehaviourController
 
     void OnAnimComplete()
     {
+        _completedSuccessfully = true;
+
         _resetAttackRoutine = WaitForAttackReset();
         StartCoroutine(_resetAttackRoutine);
 
@@ -80,6 +99,14 @@ public class CharAttackStateBC : FSMBehaviourController
         FireOnAttackFinished();
 
         UpdateAttackInfo();
+    }
+
+    public override void Exit()
+    {
+        if (!_completedSuccessfully)
+            FireOnAttackInterrupted();
+
+        base.Exit();
     }
 
     IEnumerator WaitForAttackReset()

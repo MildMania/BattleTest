@@ -6,6 +6,8 @@ public class AttackerBase : Interaction
 {
     public float BaseDamage { get; private set; }
     public float KnockBackAmount { get; private set; }
+    public DirectionEnum AttackDirection { get; private set; }
+    public AttackTypeEnum AttackType { get; private set; }
 
     public AttackInteractionInfo LatestAttackInfo { get; private set; }
 
@@ -28,10 +30,12 @@ public class AttackerBase : Interaction
         InteractionType = InteractionType.Combat;
     }
 
-    public void SetAttackParameters(float baseDamage, float knockBackAmount)
+    public void SetAttackParameters(float baseDamage, float knockBackAmount, DirectionEnum attackDirection, AttackTypeEnum attackType)
     {
         BaseDamage = baseDamage;
         KnockBackAmount = knockBackAmount;
+        AttackDirection = attackDirection;
+        AttackType = attackType;
     }
 
     public override void InteractWithInteractable(Reaction target)

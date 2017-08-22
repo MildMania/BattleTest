@@ -23,17 +23,29 @@ public abstract class MMSpriteAnimatorBase : MMGameSceneBehaviour
         if (_onUpdate != null)
             _onUpdate(remainingTime);
     }
+
+    protected Action _onComplete;
+
+    void FireOnComplete()
+    {
+        if (_onComplete != null)
+            _onComplete();
+
+        ResetOnCompleteEvent();
+    }
+
     #endregion
 
     protected override void Awake()
     {
-        base.Awake();
-        
         InitAnimQueue();
 
         SetAnimatorsActive(true);
 
         ResetAnimators();
+
+        base.Awake();
+
     }
 
     protected virtual void ResetAnimators()
@@ -53,9 +65,10 @@ public abstract class MMSpriteAnimatorBase : MMGameSceneBehaviour
 
     public virtual MMSpriteAnimatorBase PlayAnimation(int animationEnum)
     {
-        if (IsDebugEnabled)
-            Debug.Log("play anim: " + animationEnum);
-        
+        _curReferenceAnimator.OnComplete(this, OnAnimationCompleted);
+
+        ResetOnCompleteEvent();
+
         PlayAnimation(ReferenceAnimator, GetAnimStateName(animationEnum));
 
         return this;
@@ -68,9 +81,19 @@ public abstract class MMSpriteAnimatorBase : MMGameSceneBehaviour
 
     public MMSpriteAnimatorBase OnComplete(Action callback)
     {
-        _curReferenceAnimator.OnComplete(this, callback);
+        _onComplete += callback;
 
         return this;
+    }
+
+    public void UnregisterFromOnComplete(Action callback)
+    {
+        _onComplete -= callback;
+    }
+
+    void OnAnimationCompleted()
+    {
+        FireOnComplete();
     }
 
     public MMSpriteAnimatorBase OnUpdate(Action<float> callback)
@@ -119,6 +142,18 @@ public abstract class MMSpriteAnimatorBase : MMGameSceneBehaviour
 			_onUpdate -= action;
 		}
     }
+
+    void ResetOnCompleteEvent()
+    {
+        if (_onComplete == null)
+            return;
+
+        foreach (Action action in _onComplete.GetInvocationList())
+        {
+            _onComplete -= action;
+        }
+    }
+
 
     protected MMSpriteAnimatorBase PlayAnimation(Animator animator, string name)
     {

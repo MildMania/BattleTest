@@ -6,6 +6,8 @@ public class CharWeaponAttackerIC : AttackerICBase
 {
     public CharAttackStateBC AttackStateBC;
 
+    public ScreenShakeBehaviour ScreenShakeBehaviour;
+
     protected override void OnReadyToInteract()
     {
         base.OnReadyToInteract();
@@ -14,6 +16,15 @@ public class CharWeaponAttackerIC : AttackerICBase
 
         CharAttackInfo attackInfo = AttackStateBC.CurAttackInfo;
 
-        attacker.SetAttackParameters(attackInfo.BaseDamage, attackInfo.KnockBackAmount);
+        attacker.SetAttackParameters(attackInfo.BaseDamage, attackInfo.KnockBackAmount, attackInfo.AttackDirection, attackInfo.AttackType);
+    }
+
+    protected override void OnDamageGiven(DamagableBase damagable, AttackInteractionInfo attackInteractionInfo)
+    {
+        ScreenShakeBehaviour.Shake();
+
+        base.OnDamageGiven(damagable, attackInteractionInfo);
+
+
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyMoveStateBC : FSMBehaviourController
 {
     public RunBehaviour Runbehaviour;
+    public AnimationBehaviour AnimBehaviour;
 
     public Vector2 MoveDirection;
     public float MoveSpeed;
@@ -17,6 +18,8 @@ public class EnemyMoveStateBC : FSMBehaviourController
     public override void Execute()
     {
         base.Execute();
+
+        AnimBehaviour.PlayAnimation((int)EnemyAnimEnum.Move);
 
         Runbehaviour.HeadDirection = MoveDirection;
         Runbehaviour.RunSpeed = MoveSpeed;

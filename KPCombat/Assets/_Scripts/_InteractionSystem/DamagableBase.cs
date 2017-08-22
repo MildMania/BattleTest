@@ -9,7 +9,7 @@ public class DamagableBase : Reaction
 
     public bool IsDestructed { get; protected set; }
 
-    public AttackInteractionInfo CurAttackInfo { get; set; }
+    public AttackInteractionInfo CurAttackInfo { get; protected set; }
 
     #region Events
 

@@ -13,5 +13,6 @@ public enum FSMStateID
     TOOK_DAMAGE,
     KNOCK_BACK,
     RECOVER,
+    PUSHED_BACK,
     DEAD,
 }

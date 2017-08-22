@@ -16,6 +16,8 @@ public class TookDamageStateBC : FSMBehaviourController
     public override void Execute()
     {
         KnockBackBehaviour.KnockBackGridCount = AttackInteractionInfo.KnockBackGridAmout;
+        KnockBackBehaviour.KnockBackGridCountPerSec = AttackInteractionInfo.KnockBackSpeed;
+
         FSMTransitionBehaviour.DOFSMTransition(FSMStateID.KNOCK_BACK);
 
         FireOnExecutionCompleted();

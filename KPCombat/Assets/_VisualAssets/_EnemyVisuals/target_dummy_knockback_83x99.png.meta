@@ -1,19 +1,14 @@
 fileFormatVersion: 2
-guid: 3b226725b0dbd5f40870b8bc2d664a48
-timeCreated: 1502983937
+guid: 435ad3b3754072749896338600fc31a1
+timeCreated: 1503390414
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: volcano_ground_a_0
-    21300002: volcano_ground_a_1
-    21300004: volcano_ground_a_2
-    21300006: volcano_ground_a_3
-    21300008: volcano_ground_a_4
-    21300010: volcano_ground_a_5
-    21300012: volcano_ground_a_6
-    21300014: volcano_ground_a_7
-    21300016: volcano_ground_a_8
-    21300018: volcano_ground_a_9
+    21300000: target_dummy_knockback_83x99_0
+    21300002: target_dummy_knockback_83x99_1
+    21300004: target_dummy_knockback_83x99_2
+    21300006: target_dummy_knockback_83x99_3
+    21300008: target_dummy_knockback_83x99_4
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -109,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: volcano_ground_a_0
+      name: target_dummy_knockback_83x99_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 409.6
-        width: 450
-        height: 102.4
+        y: 0
+        width: 83
+        height: 99
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -123,13 +118,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: volcano_ground_a_1
+      name: target_dummy_knockback_83x99_1
       rect:
         serializedVersion: 2
-        x: 450
-        y: 409.6
-        width: 450
-        height: 102.4
+        x: 83
+        y: 0
+        width: 83
+        height: 99
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,13 +132,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: volcano_ground_a_2
+      name: target_dummy_knockback_83x99_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 307.6
-        width: 450
-        height: 102.4
+        x: 166
+        y: 0
+        width: 83
+        height: 99
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,13 +146,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: volcano_ground_a_3
+      name: target_dummy_knockback_83x99_3
       rect:
         serializedVersion: 2
-        x: 450
-        y: 307.6
-        width: 450
-        height: 102.4
+        x: 249
+        y: 0
+        width: 83
+        height: 99
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,83 +160,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: volcano_ground_a_4
+      name: target_dummy_knockback_83x99_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 205.6
-        width: 450
-        height: 102.4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: volcano_ground_a_5
-      rect:
-        serializedVersion: 2
-        x: 450
-        y: 205.6
-        width: 450
-        height: 102.4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: volcano_ground_a_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 103.6
-        width: 450
-        height: 102.4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: volcano_ground_a_7
-      rect:
-        serializedVersion: 2
-        x: 450
-        y: 103.6
-        width: 450
-        height: 102.4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: volcano_ground_a_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1.5999985
-        width: 450
-        height: 102.4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: volcano_ground_a_9
-      rect:
-        serializedVersion: 2
-        x: 450
-        y: 1.5999985
-        width: 450
-        height: 102.4
+        x: 332
+        y: 0
+        width: 83
+        height: 99
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

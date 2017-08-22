@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BattleResult
 {
-    public AttackerBase Attacker;
-    public DamagableBase Damagable;
+    public AttackerBase Attacker { get; private set; }
+    public DamagableBase Damagable { get; private set; }
 
     public bool IsDamageGiven { get; set; }
 

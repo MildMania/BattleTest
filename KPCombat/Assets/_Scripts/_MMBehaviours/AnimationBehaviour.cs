@@ -28,12 +28,14 @@ public class AnimationBehaviour : MMBehaviour
 
     public AnimationBehaviour PlayAnimation()
     {
+        ResetOnCompleteEvents();
+        ResetOnUpdateEvents();
+
         if (!_isLoopAnim)
             SpriteAnimator.PlayAnimation(_animationEnum).OnUpdate(OnAnimationUpdate).OnComplete(OnAnimationCompleted);
         else
         {
             SpriteAnimator.PlayAnimation(_animationEnum);
-            FireOnComplete();
         }
 
         return this;
@@ -78,4 +80,6 @@ public class AnimationBehaviour : MMBehaviour
             _onUpdate -= action;
         }
     }
+
+
 }

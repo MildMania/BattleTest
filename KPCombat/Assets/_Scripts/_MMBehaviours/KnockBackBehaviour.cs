@@ -12,7 +12,7 @@ public class KnockBackBehaviour : MMBehaviour
 
     public float KnockBackGridCount { get; set; }
 
-    public int KnockBackGridCountPerSec;
+    public float KnockBackGridCountPerSec;
 
     public float DistanceFromObstacle;
 
@@ -52,8 +52,6 @@ public class KnockBackBehaviour : MMBehaviour
 
     IEnumerator KnockBackProgress()
     {
-        Debug.Log("knock back amount: " + KnockBackGridCount);
-
         Vector3 targetPos = GetKnockBackPosition();
 
         float duration = GetKnockBackDuration();
@@ -82,7 +80,7 @@ public class KnockBackBehaviour : MMBehaviour
 
     float GetKnockBackDuration()
     {
-        float duration = (float)(KnockBackGridCount) / (float)(KnockBackGridCountPerSec);
+        float duration = (KnockBackGridCount) / (KnockBackGridCountPerSec);
 
         return duration;
     }

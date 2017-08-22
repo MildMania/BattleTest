@@ -17,11 +17,9 @@ public class KnockBackStateBC : FSMBehaviourController
         KnockBackBehaviour.KnockBack().OnComplete(OnKnockBackComplete);
     }
 
-    protected void OnKnockBackComplete()
+    protected virtual void OnKnockBackComplete()
     {
-        FSMTransitionBehaviour.DOFSMTransition(FSMStateID.RECOVER);
 
-        FireOnExecutionCompleted();
     }
 
     public override void Exit()

@@ -12,6 +12,8 @@ public enum CharacterAnimEnum : int
     Melee_Attack1,
     Melee_Attack2,
     Melee_Attack3,
+    Melee_Charge,
+    Knockback,
 }
 
 [System.Serializable]
@@ -27,6 +29,13 @@ public class CharacterAnimController : MMSpriteAnimatorBase
 
     protected override string GetAnimStateName(int animEnum)
     {
-        return AnimInfoList.Single(val => (int)val.AnimationType == animEnum).StateName;
+        try
+        {
+            return AnimInfoList.Single(val => (int)val.AnimationType == animEnum).StateName;
+        }
+        catch
+        {
+            return "";
+        }
     }
 }
