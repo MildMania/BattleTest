@@ -9,13 +9,13 @@ public class EnemyKnockBackBC : KnockBackStateBC
     public PusherBase Pusher;
     public PushableBase Pushable;
 
-    public EnemyAnimEnum KnockBackAnimation { get; set; }
+    public string KnockBackAnimation { get; set; }
 
     public override void Execute()
     {
         base.Execute();
 
-        AnimBehaviour.PlayAnimation((int)KnockBackAnimation).OnComplete(OnKnockBackAnimationCompleted);
+        AnimBehaviour.PlayAnimation(KnockBackAnimation).OnComplete(OnKnockBackAnimationCompleted);
     }
 
     protected override void OnKnockBackComplete()

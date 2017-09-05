@@ -15,12 +15,14 @@ public class CharAttackController : MMGameSceneBehaviour
     IEnumerator _processChargeInputRoutine;
     IEnumerator _processAttackInputRoutine;
 
+    bool _isChargeCompleted;
+
 
     protected override void StartListeningGameEvents()
     {
         AttackBC.OnAttackFinished += OnAttackCompleted;
-        AttackBC.OnAttackInterrupted += OnAttackInterrupted;
         ChargeBC.OnChargeCompleted += OnChargeCompleted;
+        ChargeBC.OnChargeInterrupted += OnChargeInterrupted;
         CharacterInputController.OnInput += OnInput;
 
         base.StartListeningGameEvents();
@@ -29,8 +31,8 @@ public class CharAttackController : MMGameSceneBehaviour
     protected override void StopListeningGameEvents()
     {
         AttackBC.OnAttackFinished -= OnAttackCompleted;
-        AttackBC.OnAttackInterrupted -= OnAttackInterrupted;
         ChargeBC.OnChargeCompleted -= OnChargeCompleted;
+        ChargeBC.OnChargeInterrupted -= OnChargeInterrupted;
         CharacterInputController.OnInput -= OnInput;
 
         base.StopListeningGameEvents();
@@ -41,7 +43,12 @@ public class CharAttackController : MMGameSceneBehaviour
         if (inputType == InputEnum.Charge)
             CheckChargeInput();
         else if (inputType == InputEnum.Attack)
-            CheckRecordAttackInput();
+        {
+            if (!_isChargeCompleted)
+                CheckRecordAttackInput();
+            else
+                PerformSuperStrike();
+        }
     }
 
     void CheckChargeInput()
@@ -75,8 +82,13 @@ public class CharAttackController : MMGameSceneBehaviour
 
     void OnChargeCompleted()
     {
-
+        _isChargeCompleted = true;
     } 
+
+    void OnChargeInterrupted()
+    {
+        _isChargeCompleted = false;
+    }
 
     void CheckRecordAttackInput()
     {
@@ -128,13 +140,6 @@ public class CharAttackController : MMGameSceneBehaviour
             FinishAttack();
     }
 
-    void OnAttackInterrupted()
-    {
-        _queueInputLength = 0; 
-
-        FinishAttack();
-    }
-
     void SwingSword()
     {
         FSMController.SetTransition(FSMStateID.MELEE_ATTACK);
@@ -143,5 +148,10 @@ public class CharAttackController : MMGameSceneBehaviour
     void FinishAttack()
     {
         FSMController.SetTransition(FSMStateID.MOVE);
+    }
+
+    void PerformSuperStrike()
+    {
+        FSMController.SetTransition(FSMStateID.SUPER_STRIKE);
     }
 }

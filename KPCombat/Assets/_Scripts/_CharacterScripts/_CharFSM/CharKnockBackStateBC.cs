@@ -8,7 +8,7 @@ public class CharKnockBackStateBC : KnockBackStateBC
 
     public override void Execute()
     {
-        AnimationBehaviour.PlayAnimation((int)CharacterAnimEnum.Knockback);
+        AnimationBehaviour.PlayAnimation(Constants.CHAR_KNOCKBACK_ANIM_STATE);
 
         base.Execute();
     }

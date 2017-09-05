@@ -13,7 +13,22 @@ public abstract class Interaction : MMGameSceneBehaviour
 
     public bool IsDebugActive;
 
-    public bool IsInteractionActive { get; set; }
+    bool _isInteractionActive;
+
+    public bool IsInteractionActive
+    {
+        get
+        {
+            return _isInteractionActive;
+        }
+        set
+        {
+            if (!value)
+                _targetReactionList.Clear();
+
+            _isInteractionActive = value;
+        }
+    }
 
     protected Reaction _newTarget;
 

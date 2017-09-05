@@ -15,4 +15,5 @@ public enum FSMStateID
     RECOVER,
     PUSHED_BACK,
     DEAD,
+    SUPER_STRIKE,
 }

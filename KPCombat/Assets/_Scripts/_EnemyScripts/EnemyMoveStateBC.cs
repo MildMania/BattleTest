@@ -19,7 +19,7 @@ public class EnemyMoveStateBC : FSMBehaviourController
     {
         base.Execute();
 
-        AnimBehaviour.PlayAnimation((int)EnemyAnimEnum.Move);
+        AnimBehaviour.PlayAnimation(Constants.ENEMY_MOVE_ANIM_STATE);
 
         Runbehaviour.HeadDirection = MoveDirection;
         Runbehaviour.RunSpeed = MoveSpeed;

@@ -11,7 +11,7 @@ public class CharPushedBackStateBC : PushedBackStateBC
     {
         base.Execute();
 
-        AnimationBehaviour.PlayAnimation((int)CharacterAnimEnum.Knockback);
+        AnimationBehaviour.PlayAnimation(Constants.CHAR_KNOCKBACK_ANIM_STATE);
     }
 
     protected override void OnKnockBackCompleted()

@@ -25,7 +25,7 @@ public class CharMoveStateBC : FSMBehaviourController
 
         Runbehaviour.StartMovement();
 
-        AnimationBehaviour.PlayAnimation((int)CharacterAnimEnum.Walk, true);
+        AnimationBehaviour.PlayAnimation(Constants.CHAR_WALK_ANIM_STATE, true);
     }
 
     public override void Stop()

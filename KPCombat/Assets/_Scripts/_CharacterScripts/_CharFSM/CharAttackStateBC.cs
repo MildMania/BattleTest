@@ -8,7 +8,7 @@ using UnityEngine;
 public class CharAttackInfo
 {
     public float BaseDamage;
-    public CharacterAnimEnum AnimEnum;
+    public string AnimName;
     public DirectionEnum AttackDirection;
     public AttackTypeEnum AttackType;
     public string AttackColliderStateName;
@@ -33,22 +33,11 @@ public class CharAttackStateBC : FSMBehaviourController
         //Debug.Log("<color=green>Attack Completed</color>");
     }
 
-    public Action OnAttackInterrupted;
-
-    void FireOnAttackInterrupted()
-    {
-        if (OnAttackInterrupted != null)
-            OnAttackInterrupted();
-
-        //Debug.Log("<color=red>Attack Interrupted</color>");
-    }
     #endregion
 
     public FSMTransitionBehaviour FSMTransition;
     public AnimationBehaviour Animationbehaviour;
     public AnimationBasedMovementBehaviour MovementBehaviour;
-
-    public MMBasicAnimController AttackCollderAnimController;
 
     public float AttackResetDuration;
 
@@ -60,8 +49,6 @@ public class CharAttackStateBC : FSMBehaviourController
     public int CurAttackInfoIndex { get; private set; }
 
     IEnumerator _resetAttackRoutine;
-
-    bool _completedSuccessfully;
 
     protected override void InitFSMBC()
     {
@@ -77,9 +64,7 @@ public class CharAttackStateBC : FSMBehaviourController
         Pusher.IsInteractionActive = false;
         Pushable.IsReactionActive = false;
 
-        _completedSuccessfully = false;
-
-        Animationbehaviour.PlayAnimation((int)CurAttackInfo.AnimEnum);
+        Animationbehaviour.PlayAnimation(CurAttackInfo.AnimName);
 
         MovementBehaviour.AnimationCurve = CurAttackInfo.AnimationCurve;
         MovementBehaviour.MovementDuration = CurAttackInfo.MovementDuration;
@@ -87,16 +72,12 @@ public class CharAttackStateBC : FSMBehaviourController
 
         MovementBehaviour.Move().OnComplete(OnMovementCompleted);
 
-        AttackCollderAnimController.PlayAnimation(CurAttackInfo.AttackColliderStateName);
-
         if (_resetAttackRoutine != null)
             StopCoroutine(_resetAttackRoutine);
     }
 
     void OnMovementCompleted()
     {
-        _completedSuccessfully = true;
-
         _resetAttackRoutine = WaitForAttackReset();
         StartCoroutine(_resetAttackRoutine);
 
@@ -111,9 +92,6 @@ public class CharAttackStateBC : FSMBehaviourController
     {
         Pusher.IsInteractionActive = true;
         Pushable.IsReactionActive = true;
-
-        if (!_completedSuccessfully)
-            FireOnAttackInterrupted();
 
         base.Exit();
     }

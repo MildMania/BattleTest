@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 112879641}
   - component: {fileID: 112879640}
   - component: {fileID: 112879639}
+  - component: {fileID: 112879642}
   m_Layer: 0
   m_Name: CharVisual
   m_TagString: Untagged
@@ -379,6 +380,18 @@ Transform:
   m_Father: {fileID: 712758489}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &112879642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112879638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6f511b98a970f478b2166b7bbbfe79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attacker: {fileID: 896099076}
 --- !u!1 &125019916
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,7 +638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &318796469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,24 +647,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 318796468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 080d359e32db01442be3e41f728e87b0, type: 3}
+  m_Script: {fileID: 11500000, guid: c68b2728d3dda514e9762244be01d969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ReferenceAnimator: {fileID: 1351010312}
-  IsDebugEnabled: 1
-  AnimInfoList:
-  - AnimationType: 1
-    StateName: IDLE
-  - AnimationType: 2
-    StateName: WALK
-  - AnimationType: 4
-    StateName: TOOK_DAMAGE_LEFT
-  - AnimationType: 5
-    StateName: TOOK_DAMAGE_RIGHT
-  - AnimationType: 3
-    StateName: MELEE_ATTACK
-  - AnimationType: 6
-    StateName: KNOCKBACK
+  IsDebugEnabled: 0
 --- !u!4 &318796471
 Transform:
   m_ObjectHideFlags: 0
@@ -1053,7 +1053,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FSMTransition: {fileID: 1944047348}
   AnimationBehaviour: {fileID: 1944047350}
-  AttackCollderAnimController: {fileID: 1403318462}
 --- !u!1 &497167260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,7 +1123,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 658667353}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &498079762
 MonoBehaviour:
@@ -1140,13 +1139,12 @@ MonoBehaviour:
   FSMTransition: {fileID: 53978114}
   Animationbehaviour: {fileID: 53978113}
   MovementBehaviour: {fileID: 53978115}
-  AttackCollderAnimController: {fileID: 896099077}
   AttackResetDuration: 0.2
   Pusher: {fileID: 411960955}
   Pushable: {fileID: 146775613}
   AttackInfoList:
   - BaseDamage: 2
-    AnimEnum: 3
+    AnimName: Melee_Attack_1
     AttackDirection: 1
     AttackType: 1
     AttackColliderStateName: ATTACK1
@@ -1172,7 +1170,7 @@ MonoBehaviour:
     MoveDistance: {x: 0, y: 1}
     MovementDuration: 0.5
   - BaseDamage: 2
-    AnimEnum: 4
+    AnimName: Melee_Attack_2
     AttackDirection: 2
     AttackType: 1
     AttackColliderStateName: ATTACK2
@@ -1187,6 +1185,12 @@ MonoBehaviour:
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
+        time: 0.75461656
+        value: 0.9987186
+        inSlope: 2.284646
+        outSlope: Infinity
+        tangentMode: 97
+      - serializedVersion: 2
         time: 0.8093262
         value: 0.9937515
         inSlope: 2
@@ -1196,9 +1200,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     MoveDistance: {x: 0, y: 1}
-    MovementDuration: 0.367
+    MovementDuration: 0.5
   - BaseDamage: 2
-    AnimEnum: 5
+    AnimName: Melee_Attack_3
     AttackDirection: 3
     AttackType: 2
     AttackColliderStateName: ATTACK3
@@ -1445,10 +1449,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1342656342}
-  - {fileID: 1262325214}
   - {fileID: 498079761}
   - {fileID: 1519915375}
   - {fileID: 969720756}
+  - {fileID: 1897716511}
   m_Father: {fileID: 200681335}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1569,26 +1573,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 712758485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d85754c9244a3d42be1de8fdd52054a, type: 3}
+  m_Script: {fileID: 11500000, guid: c68b2728d3dda514e9762244be01d969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ReferenceAnimator: {fileID: 112879639}
   IsDebugEnabled: 0
-  AnimInfoList:
-  - AnimationType: 1
-    StateName: IDLE
-  - AnimationType: 2
-    StateName: WALK
-  - AnimationType: 3
-    StateName: MELEE_ATTACK_1
-  - AnimationType: 4
-    StateName: MELEE_ATTACK_2
-  - AnimationType: 5
-    StateName: MELEE_ATTACK_3
-  - AnimationType: 6
-    StateName: MELEE_CHARGE_ENTER
-  - AnimationType: 7
-    StateName: KNOCKBACK
 --- !u!4 &712758489
 Transform:
   m_ObjectHideFlags: 0
@@ -1955,8 +1944,6 @@ GameObject:
   - component: {fileID: 896099078}
   - component: {fileID: 896099076}
   - component: {fileID: 896099075}
-  - component: {fileID: 896099077}
-  - component: {fileID: 896099074}
   - component: {fileID: 896099073}
   - component: {fileID: 896099079}
   m_Layer: 8
@@ -1985,7 +1972,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 896099071}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -2004,23 +1991,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.6122537}
   m_EdgeRadius: 0
---- !u!95 &896099074
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 896099071}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b674be28fae6d1b49b9c251d92344417, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &896099075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2044,20 +2014,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b54e1dfb068b29841a3095ec3c41de37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsInteractionActiveOnStart: 1
+  IsInteractionActiveOnStart: 0
   InteractWithNewTarget: 1
   IsDebugActive: 0
---- !u!114 &896099077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 896099071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 389fe36ebd08bff47a04dfc7b5b443f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &896099078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2118,7 +2077,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 658667353}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &969720757
 MonoBehaviour:
@@ -2242,34 +2201,6 @@ MonoBehaviour:
   AnimBehaviour: {fileID: 1944047350}
   Pusher: {fileID: 340937271}
   Pushable: {fileID: 631681253}
---- !u!1 &1262325213
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1262325214}
-  m_Layer: 0
-  m_Name: StandState
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1262325214
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1262325213}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 658667353}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1294873599
 GameObject:
   m_ObjectHideFlags: 0
@@ -2366,6 +2297,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1351010314}
+  - component: {fileID: 1351010315}
   - component: {fileID: 1351010313}
   - component: {fileID: 1351010312}
   m_Layer: 10
@@ -2447,6 +2379,18 @@ Transform:
   m_Father: {fileID: 318796471}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1351010315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1351010311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6f511b98a970f478b2166b7bbbfe79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attacker: {fileID: 1403318457}
 --- !u!1 &1353838968
 GameObject:
   m_ObjectHideFlags: 0
@@ -2588,7 +2532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b54e1dfb068b29841a3095ec3c41de37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsInteractionActiveOnStart: 1
+  IsInteractionActiveOnStart: 0
   InteractWithNewTarget: 1
   IsDebugActive: 0
 --- !u!114 &1403318458
@@ -2643,7 +2587,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1403318455}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -2717,7 +2661,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 658667353}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1519915376
 MonoBehaviour:
@@ -2972,6 +2916,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1897716510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1897716511}
+  - component: {fileID: 1897716512}
+  m_Layer: 0
+  m_Name: SuperStrikeState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1897716511
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1897716510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 658667353}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1897716512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1897716510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9530301e3d8d547a2be54799bcec61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FSMTransition: {fileID: 53978114}
+  AnimationBehaviour: {fileID: 53978113}
+  MovementBehaviour: {fileID: 53978115}
+  MovementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.72682524
+      value: 1.0107169
+      inSlope: 1.6790628
+      outSlope: Infinity
+      tangentMode: 97
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  MovementDuration: 1
+  MovementDistance: {x: 0, y: 1}
 --- !u!1 &1944047345
 GameObject:
   m_ObjectHideFlags: 0

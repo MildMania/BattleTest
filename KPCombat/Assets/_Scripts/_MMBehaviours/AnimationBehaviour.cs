@@ -15,12 +15,12 @@ public class AnimationBehaviour : MMBehaviour
 
     public MMSpriteAnimatorBase SpriteAnimator;
 
-    int _animationEnum;
+    string _stateName;
     bool _isLoopAnim;
 
-    public AnimationBehaviour PlayAnimation(int animationEnum, bool isLoopAnim = false)
+    public AnimationBehaviour PlayAnimation(string stateName, bool isLoopAnim = false)
     {
-        _animationEnum = animationEnum;
+        _stateName = stateName;
         _isLoopAnim = isLoopAnim;
 
         return PlayAnimation();
@@ -32,10 +32,11 @@ public class AnimationBehaviour : MMBehaviour
         ResetOnUpdateEvents();
 
         if (!_isLoopAnim)
-            SpriteAnimator.PlayAnimation(_animationEnum).OnUpdate(OnAnimationUpdate).OnComplete(OnAnimationCompleted);
+            SpriteAnimator.PlayAnimation(_stateName).OnUpdate(OnAnimationUpdate).OnComplete(OnAnimationCompleted);
         else
         {
-            SpriteAnimator.PlayAnimation(_animationEnum);
+            SpriteAnimator.PlayAnimation(_stateName);
+            FireOnComplete();
         }
 
         return this;
@@ -74,12 +75,10 @@ public class AnimationBehaviour : MMBehaviour
     {
         if (_onUpdate == null)
             return;
-        
+
         foreach (Action<float> action in _onUpdate.GetInvocationList())
         {
             _onUpdate -= action;
         }
     }
-
-
 }

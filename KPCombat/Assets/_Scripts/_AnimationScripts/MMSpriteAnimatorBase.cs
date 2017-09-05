@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class MMSpriteAnimatorBase : MMGameSceneBehaviour
+public class MMSpriteAnimatorBase : MMGameSceneBehaviour
 {
     public Animator ReferenceAnimator;
 
@@ -13,10 +13,8 @@ public abstract class MMSpriteAnimatorBase : MMGameSceneBehaviour
 
     public bool IsDebugEnabled;
 
-    const string IDLE_ANIM_NAME = "IDLE";
-
-	#region Events
-	protected Action<float> _onUpdate;
+    #region Events
+    protected Action<float> _onUpdate;
 
     void FireOnUpdate(float remainingTime)
     {
@@ -33,24 +31,18 @@ public abstract class MMSpriteAnimatorBase : MMGameSceneBehaviour
 
         ResetOnCompleteEvent();
     }
-
     #endregion
 
     protected override void Awake()
     {
-        InitAnimQueue();
-
-        SetAnimatorsActive(true);
-
-        ResetAnimators();
-
         base.Awake();
 
+        InitAnimQueue();
     }
 
     protected virtual void ResetAnimators()
     {
-        ReferenceAnimator.Play(IDLE_ANIM_NAME);
+        ReferenceAnimator.Play(Constants.IDLE_ANIM_NAME);
     }
 
     protected virtual void SetAnimatorsActive(bool isActive)
@@ -63,13 +55,13 @@ public abstract class MMSpriteAnimatorBase : MMGameSceneBehaviour
         _curReferenceAnimator = ReferenceAnimator;
     }
 
-    public virtual MMSpriteAnimatorBase PlayAnimation(int animationEnum)
+    public virtual MMSpriteAnimatorBase PlayAnimation(string stateName)
     {
         _curReferenceAnimator.OnComplete(this, OnAnimationCompleted);
 
         ResetOnCompleteEvent();
 
-        PlayAnimation(ReferenceAnimator, GetAnimStateName(animationEnum));
+        PlayAnimation(ReferenceAnimator, stateName);
 
         return this;
     }
@@ -91,7 +83,7 @@ public abstract class MMSpriteAnimatorBase : MMGameSceneBehaviour
         _onComplete -= callback;
     }
 
-    void OnAnimationCompleted()
+    protected void OnAnimationCompleted()
     {
         FireOnComplete();
     }
@@ -121,7 +113,7 @@ public abstract class MMSpriteAnimatorBase : MMGameSceneBehaviour
 
             remainingTime = (1.0f - normalizedTime) * stateInfo.length;
 
-			FireOnUpdate(remainingTime);
+            FireOnUpdate(remainingTime);
 
             yield return null;
 
@@ -137,10 +129,10 @@ public abstract class MMSpriteAnimatorBase : MMGameSceneBehaviour
         if (_onUpdate == null)
             return;
 
-		foreach (Action<float> action in _onUpdate.GetInvocationList())
-		{
-			_onUpdate -= action;
-		}
+        foreach (Action<float> action in _onUpdate.GetInvocationList())
+        {
+            _onUpdate -= action;
+        }
     }
 
     void ResetOnCompleteEvent()
@@ -154,7 +146,6 @@ public abstract class MMSpriteAnimatorBase : MMGameSceneBehaviour
         }
     }
 
-
     protected MMSpriteAnimatorBase PlayAnimation(Animator animator, string name)
     {
         animator.enabled = false;
@@ -163,6 +154,4 @@ public abstract class MMSpriteAnimatorBase : MMGameSceneBehaviour
 
         return this;
     }
-
-    protected abstract string GetAnimStateName(int animEnum);
 }

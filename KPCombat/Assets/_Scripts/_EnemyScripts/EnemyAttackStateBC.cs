@@ -7,10 +7,6 @@ public class EnemyAttackStateBC : FSMBehaviourController
     public FSMTransitionBehaviour FSMTransition;
     public AnimationBehaviour AnimationBehaviour;
 
-    public MMBasicAnimController AttackCollderAnimController;
-
-    const string ATTACK_COLLIDER_STATE = "ATTACK1";
-
     protected override void InitFSMBC()
     {
         StateID = FSMStateID.MELEE_ATTACK;
@@ -20,9 +16,7 @@ public class EnemyAttackStateBC : FSMBehaviourController
     {
         base.Execute();
 
-        AttackCollderAnimController.PlayAnimation(ATTACK_COLLIDER_STATE);
-
-        AnimationBehaviour.PlayAnimation((int)EnemyAnimEnum.Melee_Attack).OnComplete(OnAnimationCompleted);
+        AnimationBehaviour.PlayAnimation(Constants.ENEMY_MELEE_ATTACK_ANIM_STATE).OnComplete(OnAnimationCompleted);
     }
 
     void OnAnimationCompleted()

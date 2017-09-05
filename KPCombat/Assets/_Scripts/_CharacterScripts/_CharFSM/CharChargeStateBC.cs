@@ -11,9 +11,19 @@ public class CharChargeStateBC : FSMBehaviourController
         if (OnChargeCompleted != null)
             OnChargeCompleted();
     }
+
+    public Action OnChargeInterrupted;
+
+    void FireOnChargeInterrupted()
+    {
+        if (OnChargeInterrupted != null)
+            OnChargeInterrupted();
+    }
     #endregion
 
     public AnimationBehaviour Animationbehaviour;
+
+    bool _isChargeCompleted;
 
     protected override void InitFSMBC()
     {
@@ -22,13 +32,29 @@ public class CharChargeStateBC : FSMBehaviourController
 
     public override void Execute()
     {
+        _isChargeCompleted = false;
+
         base.Execute();
 
-        Animationbehaviour.PlayAnimation((int)CharacterAnimEnum.Melee_Charge).OnComplete(OnChargeEnterAnimCompleted);
+        Animationbehaviour.PlayAnimation(Constants.CHAR_MELEE_CHARGE_ENTER_ANIM_STATE).OnComplete(OnChargeEnterAnimCompleted);
+    }
+
+    public override void Exit()
+    {
+        if (!_isChargeCompleted)
+            FireOnChargeInterrupted();
+
+        _isChargeCompleted = false;
+
+        base.Exit();
     }
 
     void OnChargeEnterAnimCompleted()
     {
+        _isChargeCompleted = true;
+
         FireOnChargeCompleted();
+
+        Debug.Log("<color=cyan>Charge Completed!</color>");
     }
 }
