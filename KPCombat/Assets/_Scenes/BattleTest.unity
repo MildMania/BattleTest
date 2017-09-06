@@ -392,6 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attacker: {fileID: 896099076}
+  IsDebugEnabled: 0
 --- !u!1 &125019916
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,6 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec5cdb44112a0cf4cab4b0828925b15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChargeDuration: 1
   Animationbehaviour: {fileID: 53978113}
 --- !u!1 &318796468
 GameObject:
@@ -638,7 +640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &318796469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,9 +772,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14075ecda30f6fa468b3232e8a3007a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsInteractionActiveOnStart: 0
+  IsInteractionActiveOnStart: 1
   InteractWithNewTarget: 1
   IsDebugActive: 1
+  _isInteractionActive: 0
 --- !u!114 &340937272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,7 +800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PushDirection: {x: 0, y: -1}
-  PushAmount: 1
+  PushAmount: 1.5
   PushSpeed: 7
 --- !u!1 &374764002
 GameObject:
@@ -956,6 +959,7 @@ MonoBehaviour:
   IsInteractionActiveOnStart: 1
   InteractWithNewTarget: 1
   IsDebugActive: 0
+  _isInteractionActive: 0
 --- !u!114 &411960956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -980,7 +984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PushDirection: {x: 0, y: 1}
-  PushAmount: 2
+  PushAmount: 1
   PushSpeed: 7
 --- !u!1 &427631192
 GameObject:
@@ -1053,6 +1057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FSMTransition: {fileID: 1944047348}
   AnimationBehaviour: {fileID: 1944047350}
+  Attacker: {fileID: 1403318457}
 --- !u!1 &497167260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,6 +1145,7 @@ MonoBehaviour:
   Animationbehaviour: {fileID: 53978113}
   MovementBehaviour: {fileID: 53978115}
   AttackResetDuration: 0.2
+  Attacker: {fileID: 896099076}
   Pusher: {fileID: 411960955}
   Pushable: {fileID: 146775613}
   AttackInfoList:
@@ -1147,7 +1153,6 @@ MonoBehaviour:
     AnimName: Melee_Attack_1
     AttackDirection: 1
     AttackType: 1
-    AttackColliderStateName: ATTACK1
     KnockBackAmount: 0.3
     AnimationCurve:
       serializedVersion: 2
@@ -1173,7 +1178,6 @@ MonoBehaviour:
     AnimName: Melee_Attack_2
     AttackDirection: 2
     AttackType: 1
-    AttackColliderStateName: ATTACK2
     KnockBackAmount: 0.3
     AnimationCurve:
       serializedVersion: 2
@@ -1205,7 +1209,6 @@ MonoBehaviour:
     AnimName: Melee_Attack_3
     AttackDirection: 3
     AttackType: 2
-    AttackColliderStateName: ATTACK3
     KnockBackAmount: 1.5
     AnimationCurve:
       serializedVersion: 2
@@ -1406,7 +1409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed1aeb8aef383c4584abc2efe3cd303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsReactionActiveOnStart: 0
+  IsReactionActiveOnStart: 1
   IsDebugEnabled: 0
 --- !u!114 &631681254
 MonoBehaviour:
@@ -1540,7 +1543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TapDuration: 0.2
-  TapWorldTreshold: 0.5
+  TapWorldTreshold: 1
   PressDuration: 0.05
   DragWorldTreshold: 0.2
   MaxInputCount: 5
@@ -1619,8 +1622,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0560b200dc7131c4c95ece90f6890889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDebugEnabled: 0
   FSMController: {fileID: 200681336}
+  IsChargePressed: 0
+  IsDebugEnabled: 0
 --- !u!1 &720773817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1978,7 +1982,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.3059585}
+  m_Offset: {x: 0, y: 0.20182276}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1989,7 +1993,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.6122537}
+  m_Size: {x: 1, y: 1.8205252}
   m_EdgeRadius: 0
 --- !u!114 &896099075
 MonoBehaviour:
@@ -2017,6 +2021,7 @@ MonoBehaviour:
   IsInteractionActiveOnStart: 0
   InteractWithNewTarget: 1
   IsDebugActive: 0
+  _isInteractionActive: 0
 --- !u!114 &896099078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2122,6 +2127,7 @@ Transform:
   m_Children:
   - {fileID: 288006049}
   - {fileID: 549726786}
+  - {fileID: 1401890126}
   m_Father: {fileID: 200681335}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2391,6 +2397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attacker: {fileID: 1403318457}
+  IsDebugEnabled: 0
 --- !u!1 &1353838968
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,6 +2492,48 @@ MonoBehaviour:
   FSMType: 2
   FSMAnimator: {fileID: 1381017779}
   IsDebugActive: 0
+--- !u!1 &1401890125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1401890126}
+  - component: {fileID: 1401890127}
+  m_Layer: 0
+  m_Name: ChargeExitState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1401890126
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1401890125}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1209864716}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1401890127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1401890125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a302567799935646a0c6b4d69109b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimationBehaviour: {fileID: 53978113}
+  FsmTransitionBehaviour: {fileID: 53978114}
 --- !u!1 &1403318455
 GameObject:
   m_ObjectHideFlags: 0
@@ -2535,6 +2584,7 @@ MonoBehaviour:
   IsInteractionActiveOnStart: 0
   InteractWithNewTarget: 1
   IsDebugActive: 0
+  _isInteractionActive: 0
 --- !u!114 &1403318458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2956,35 +3006,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9530301e3d8d547a2be54799bcec61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackInfo:
+    BaseDamage: 4
+    AnimName: Super_Strike
+    AttackDirection: 3
+    AttackType: 2
+    KnockBackAmount: 5
+    AnimationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.68149304
+        value: 0.9957496
+        inSlope: 1.6382337
+        outSlope: Infinity
+        tangentMode: 97
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    MoveDistance: {x: 0, y: 1}
+    MovementDuration: 1
+  AttackBC: {fileID: 498079762}
   FSMTransition: {fileID: 53978114}
   AnimationBehaviour: {fileID: 53978113}
   MovementBehaviour: {fileID: 53978115}
-  MovementCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.72682524
-      value: 1.0107169
-      inSlope: 1.6790628
-      outSlope: Infinity
-      tangentMode: 97
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  MovementDuration: 1
-  MovementDistance: {x: 0, y: 1}
+  Attacker: {fileID: 896099076}
+  Pusher: {fileID: 411960955}
+  Pushable: {fileID: 146775613}
 --- !u!1 &1944047345
 GameObject:
   m_ObjectHideFlags: 0

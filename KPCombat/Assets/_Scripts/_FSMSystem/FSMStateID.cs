@@ -16,4 +16,5 @@ public enum FSMStateID
     PUSHED_BACK,
     DEAD,
     SUPER_STRIKE,
+    MELEE_CHARGE_EXIT
 }

@@ -10,6 +10,7 @@ public class InputSchemeBase
         GestureManager.OnSwipe += OnSwipe;
         GestureManager.OnFingerUp += OnFingerUp;
         GestureManager.OnFingerUpOnStartPos += OnFingerUpOnStartPos;
+        GestureManager.OnFingerUpNotOnStartPos += OnFingerUpNotOnStartPos;
         GestureManager.OnTap += OnTap;
         GestureManager.OnPress += OnPress;
     }
@@ -20,6 +21,7 @@ public class InputSchemeBase
         GestureManager.OnSwipe -= OnSwipe;
         GestureManager.OnFingerUp -= OnFingerUp;
         GestureManager.OnFingerUpOnStartPos -= OnFingerUpOnStartPos;
+        GestureManager.OnFingerUpNotOnStartPos -= OnFingerUpNotOnStartPos;
         GestureManager.OnTap -= OnTap;
         GestureManager.OnPress -= OnPress;
 
@@ -37,6 +39,11 @@ public class InputSchemeBase
     }
 
     protected virtual void OnFingerUpOnStartPos(int fingerID, Vector2 inputPos)
+    {
+
+    }
+
+    protected virtual void OnFingerUpNotOnStartPos(int fingerID, Vector2 inputPos)
     {
 
     }

@@ -11,7 +11,6 @@ public class CharAttackInfo
     public string AnimName;
     public DirectionEnum AttackDirection;
     public AttackTypeEnum AttackType;
-    public string AttackColliderStateName;
     public float KnockBackAmount;
     public AnimationCurve AnimationCurve;
     public Vector2 MoveDistance;
@@ -41,11 +40,13 @@ public class CharAttackStateBC : FSMBehaviourController
 
     public float AttackResetDuration;
 
+    public AttackerBase Attacker;
+
     public PusherBase Pusher;
     public PushableBase Pushable;
 
     public List<CharAttackInfo> AttackInfoList;
-    public CharAttackInfo CurAttackInfo { get; private set; }
+    public CharAttackInfo CurAttackInfo { get; set; }
     public int CurAttackInfoIndex { get; private set; }
 
     IEnumerator _resetAttackRoutine;
@@ -93,6 +94,8 @@ public class CharAttackStateBC : FSMBehaviourController
         Pusher.IsInteractionActive = true;
         Pushable.IsReactionActive = true;
 
+        Attacker.IsInteractionActive = false;
+
         base.Exit();
     }
 
@@ -117,7 +120,7 @@ public class CharAttackStateBC : FSMBehaviourController
         CurAttackInfo = AttackInfoList[CurAttackInfoIndex];
     }
 
-    void ResetAttackInfo()
+    public void ResetAttackInfo()
     {
         CurAttackInfo = AttackInfoList[0];
         CurAttackInfoIndex = 0;

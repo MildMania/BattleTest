@@ -7,6 +7,8 @@ public class EnemyAttackStateBC : FSMBehaviourController
     public FSMTransitionBehaviour FSMTransition;
     public AnimationBehaviour AnimationBehaviour;
 
+    public AttackerBase Attacker;
+
     protected override void InitFSMBC()
     {
         StateID = FSMStateID.MELEE_ATTACK;
@@ -28,6 +30,8 @@ public class EnemyAttackStateBC : FSMBehaviourController
 
     public override void Exit()
     {
+        Attacker.IsInteractionActive = false;
+
         AnimationBehaviour.UnRegisterOnComplete(OnAnimationCompleted);
 
         base.Exit();

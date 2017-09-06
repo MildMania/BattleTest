@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class CharChargeStateBC : FSMBehaviourController
 {
+    public float ChargeDuration;
+
+    IEnumerator _waitForChargeRoutine;
+
     #region Events
     public Action OnChargeCompleted;
 
@@ -36,7 +41,23 @@ public class CharChargeStateBC : FSMBehaviourController
 
         base.Execute();
 
-        Animationbehaviour.PlayAnimation(Constants.CHAR_MELEE_CHARGE_ENTER_ANIM_STATE).OnComplete(OnChargeEnterAnimCompleted);
+        Animationbehaviour.PlayAnimation(Constants.CHAR_MELEE_CHARGE_ENTER_ANIM_STATE);
+
+        StartWaitForChargeProgress();
+    }
+
+    void StartWaitForChargeProgress()
+    {
+        StopWaitForChargeProgress();
+
+        _waitForChargeRoutine = WaitForChargeProgress();
+        StartCoroutine(_waitForChargeRoutine);
+    }
+
+    void StopWaitForChargeProgress()
+    {
+        if (_waitForChargeRoutine != null)
+            StopCoroutine(_waitForChargeRoutine);
     }
 
     public override void Exit()
@@ -46,10 +67,19 @@ public class CharChargeStateBC : FSMBehaviourController
 
         _isChargeCompleted = false;
 
+        StopWaitForChargeProgress();
+
         base.Exit();
     }
 
-    void OnChargeEnterAnimCompleted()
+    IEnumerator WaitForChargeProgress()
+    {
+        yield return new WaitForSeconds(ChargeDuration);
+
+        ChargeCompleted();
+    }
+
+    void ChargeCompleted()
     {
         _isChargeCompleted = true;
 

@@ -11,7 +11,7 @@ public class CharController : MMGameSceneBehaviour
         base.StartListeningEvents();
 
         KeyboardManager.AddListener(KeyCode.S, KeyState.Down, StartGameButtonPressed);
-        GestureManager.OnFingerDown += StartGameInputGiven;
+        GestureManager.OnFingerUp += StartGameInputGiven;
     }
 
     void StartGameButtonPressed()
@@ -23,7 +23,7 @@ public class CharController : MMGameSceneBehaviour
 
     void StartGameInputGiven(int index, Vector2 input)
     {
-        GestureManager.OnFingerDown -= StartGameInputGiven;
+        GestureManager.OnFingerUp -= StartGameInputGiven;
 
         GameManager.Instance.StartGame();
     }

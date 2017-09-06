@@ -13,7 +13,7 @@ public abstract class Interaction : MMGameSceneBehaviour
 
     public bool IsDebugActive;
 
-    bool _isInteractionActive;
+    public bool _isInteractionActive;
 
     public bool IsInteractionActive
     {

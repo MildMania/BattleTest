@@ -22,14 +22,14 @@ public class EnemyKnockBackBC : KnockBackStateBC
     {
         base.OnKnockBackComplete();
 
-        Pusher.IsInteractionActive = true;
-        Pushable.IsReactionActive = true;
+        //Pusher.IsInteractionActive = true;
+        //Pushable.IsReactionActive = true;
     }
 
     void OnKnockBackAnimationCompleted()
     {
-        Pusher.IsInteractionActive = false;
-        Pushable.IsReactionActive = false;
+        //Pusher.IsInteractionActive = false;
+        //Pushable.IsReactionActive = false;
 
         FSMTransitionBehaviour.DOFSMTransition(FSMStateID.MOVE);
 
@@ -38,8 +38,8 @@ public class EnemyKnockBackBC : KnockBackStateBC
 
     public override void Exit()
     {
-        Pusher.IsInteractionActive = false;
-        Pushable.IsReactionActive = false;
+        //Pusher.IsInteractionActive = false;
+        //Pushable.IsReactionActive = false;
 
         base.Exit();
 

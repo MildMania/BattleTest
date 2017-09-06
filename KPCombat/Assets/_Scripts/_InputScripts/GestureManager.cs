@@ -92,6 +92,8 @@ public class GestureManager : MonoBehaviour
     public static Action<int, Vector2> OnRightFingerUp;
     public static Action<int, Vector2> OnFingerUp;
     public static Action<int, Vector2> OnFingerUpOnStartPos;
+    public static Action<int, Vector2> OnFingerUpNotOnStartPos;
+
 
     public static Action<int, Vector2, Vector2> OnDragBegin;
     public static Action<int, Vector2, Vector2> OnDragMove;
@@ -182,6 +184,12 @@ public class GestureManager : MonoBehaviour
             OnFingerUpOnStartPos(fingerId, fingerPos);
     }
 
+    private void FireOnFingerUpNotOnStartPos(int fingerId, Vector2 fingerPos)
+    {
+        if (OnFingerUpNotOnStartPos != null)
+            OnFingerUpNotOnStartPos(fingerId, fingerPos);
+    }
+
     private void FireOnDragBegin(int fingerId, Vector2 fingerPos, Vector2 startPos)
     {
         if (OnDragBegin != null)
@@ -260,9 +268,9 @@ public class GestureManager : MonoBehaviour
     {
         if (Camera.main == null)
             return;
-        
+
         float worldToPixels = ((Screen.height / 2.0f) / Camera.main.orthographicSize);
-        
+
         _tapPixelTreshold = worldToPixels * TapWorldTreshold;
         _dragPixelTreshold = worldToPixels * DragWorldTreshold;
         _dragSwipePixelTreshold = worldToPixels * DragSwipeWorldTreshold;
@@ -295,7 +303,7 @@ public class GestureManager : MonoBehaviour
     void ProcessInputData(GestureManagerTouch touch, int index)
     {
         Vector3 inputPos = Vector3.zero;
-        
+
         if (Utilities.IsTouchPlatform())
             ProcessTouchInput(touch, index);
         else
@@ -410,10 +418,10 @@ public class GestureManager : MonoBehaviour
         if (touch.IsMoved)
             DragEnded(touch, index);
         else
-        {
             CheckTapped(touch, index);
-            CheckFingerUpOnStartPos(touch, index);
-        }
+
+        CheckFingerUpOnStartPos(touch, index);
+
 
         FireOnFingerUp(index, touch.TouchPoint);
 
@@ -464,7 +472,7 @@ public class GestureManager : MonoBehaviour
     void PossibleSwipeBegan(GestureManagerTouch touch, int index)
     {
         touch.IsSwipePossible = true;
-        
+
         touch.SwipeStartPoint = touch.TouchPoint;
 
         if (Mathf.Abs(touch.DeltaMove.x) > Mathf.Abs(touch.DeltaMove.y))
@@ -486,7 +494,7 @@ public class GestureManager : MonoBehaviour
                     PossibleSwipeBegan(touch, index);
                 else
                     touch.IsSwipePossible = false;
-                
+
                 return;
             }
 
@@ -513,10 +521,11 @@ public class GestureManager : MonoBehaviour
 
     void CheckFingerUpOnStartPos(GestureManagerTouch touch, int index)
     {
-        if (Vector2.Distance(touch.StartPoint, touch.TouchPoint) > _tapPixelTreshold)
-            return;
-
-        FireOnFingerUpOnStartPos(index, touch.TouchPoint);
+        if (!touch.IsMoved
+            && Vector2.Distance(touch.StartPoint, touch.TouchPoint) <= _tapPixelTreshold)
+            FireOnFingerUpOnStartPos(index, touch.TouchPoint);
+        else
+            FireOnFingerUpNotOnStartPos(index, touch.TouchPoint);
     }
 
     void CheckTapped(GestureManagerTouch touch, int index)
@@ -553,6 +562,6 @@ public class GestureManager : MonoBehaviour
                 FireOnRightPress(index, touch.TouchPoint, duration);
                 break;
         }
-            
+
     }
 }

@@ -3,23 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum InputEnum
+public enum CharacterInputType
 {
     Charge,
     Attack,
+    ChargeReleased
 
 }
 
 public class CharacterInputController : MMGameSceneBehaviour {
 
-    public static CharacterInputController Instance { get; private set; } 
+    public static CharacterInputController Instance { get; private set; }
+
+    public FSMController FSMController;
+
+    public bool IsChargePressed;
 
     public bool IsDebugEnabled;
 
-    #region Events
-    public static Action<InputEnum> OnInput;
+    InputSchemeBase _curInputScheme;
 
-    void FireOnInput(InputEnum inputType)
+    #region Events
+    public static Action<CharacterInputType> OnInput;
+
+    void FireOnCharacterInput(CharacterInputType inputType)
     {
         if (OnInput != null)
             OnInput(inputType);
@@ -29,9 +36,6 @@ public class CharacterInputController : MMGameSceneBehaviour {
     }
     #endregion
 
-    InputSchemeBase _curInputScheme;
-
-    public FSMController FSMController;
 
     protected override void Awake()
     {
@@ -99,20 +103,45 @@ public class CharacterInputController : MMGameSceneBehaviour {
 
     public void OnAttackPressed()
     {
+        IsChargePressed = true;
+
         FSMStateID battleStateID = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
 
         if (battleStateID == FSMStateID.MELEE_ATTACK)
-            FireOnInput(InputEnum.Attack);
+            FireOnCharacterInput(CharacterInputType.Attack);
         else
-            FireOnInput(InputEnum.Charge);
+        {
+            FireOnCharacterInput(CharacterInputType.Charge);
+        }
     }
 
     public void OnAttackReleased()
     {
         FSMStateID battleStateID = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
 
-        if (battleStateID != FSMStateID.MELEE_ATTACK
-            && battleStateID != FSMStateID.IDLE)
-            FireOnInput(InputEnum.Attack);
+        if (battleStateID != FSMStateID.MELEE_ATTACK)
+            FireOnCharacterInput(CharacterInputType.Attack);
+
+        IsChargePressed = false;
     }
+
+    public void OnChargeReleased()
+    {
+        FSMStateID battleStateID = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
+
+        if (battleStateID == FSMStateID.MELEE_CHARGE)
+            FireOnCharacterInput(CharacterInputType.ChargeReleased);
+
+        IsChargePressed = false;
+    }
+
+    /*public void OnJumpLeftPressed()
+    {
+        FireOnCharacterInput(CharacterInputType.LeftJump);
+    }
+
+    public void OnRightJumpPressed()
+    {
+        FireOnCharacterInput(CharacterInputType.RightJump);
+    }*/
 }

@@ -38,11 +38,13 @@ public class CharAttackController : MMGameSceneBehaviour
         base.StopListeningGameEvents();
     }
 
-    void OnInput(InputEnum inputType)
+    void OnInput(CharacterInputType inputType)
     {
-        if (inputType == InputEnum.Charge)
+        if (inputType == CharacterInputType.Charge)
             CheckChargeInput();
-        else if (inputType == InputEnum.Attack)
+        else if(inputType == CharacterInputType.ChargeReleased)
+            CheckChargeReleasedInput();
+        else if (inputType == CharacterInputType.Attack)
         {
             if (!_isChargeCompleted)
                 CheckRecordAttackInput();
@@ -77,6 +79,8 @@ public class CharAttackController : MMGameSceneBehaviour
 
     void Charge()
     {
+        _isChargeCompleted = false;
+
         FSMController.SetTransition(FSMStateID.MELEE_CHARGE);
     }
 
@@ -88,6 +92,16 @@ public class CharAttackController : MMGameSceneBehaviour
     void OnChargeInterrupted()
     {
         _isChargeCompleted = false;
+    }
+
+    void CheckChargeReleasedInput()
+    {
+        ReleaseCharge();
+    }
+
+    void ReleaseCharge()
+    {
+        FSMController.SetTransition(FSMStateID.MELEE_CHARGE_EXIT);
     }
 
     void CheckRecordAttackInput()
@@ -119,7 +133,8 @@ public class CharAttackController : MMGameSceneBehaviour
 
             yield return null;
 
-        } while (curBattleState != FSMStateID.MELEE_CHARGE);
+        } while (curBattleState != FSMStateID.MELEE_CHARGE
+        && curBattleState != FSMStateID.IDLE);
 
         SwingSword();
 
@@ -137,7 +152,12 @@ public class CharAttackController : MMGameSceneBehaviour
         if (_queueInputLength > 0)
             SwingSword();
         else
+        {
             FinishAttack();
+
+            if (CharacterInputController.Instance.IsChargePressed)
+                CheckChargeInput();
+        }
     }
 
     void SwingSword()
