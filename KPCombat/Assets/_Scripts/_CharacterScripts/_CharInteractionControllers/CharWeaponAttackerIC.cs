@@ -8,6 +8,13 @@ public class CharWeaponAttackerIC : AttackerICBase
 
     public ScreenShakeBehaviour ScreenShakeBehaviour;
 
+    public FSMTransitionBehaviour FSMTransitionBehaviour;
+    public KnockBackBehaviour KnockBackBehaviour;
+
+    public Vector2 ReflectDirection;
+    public float ReflectAmount;
+    public float ReflectSpeed;
+
     protected override void OnReadyToInteract()
     {
         base.OnReadyToInteract();
@@ -22,9 +29,14 @@ public class CharWeaponAttackerIC : AttackerICBase
     protected override void OnDamageGiven(DamagableBase damagable, AttackInteractionInfo attackInteractionInfo)
     {
         ScreenShakeBehaviour.Shake();
+    }
 
-        base.OnDamageGiven(damagable, attackInteractionInfo);
+    protected override void OnAttackReflected(DamagableBase damagable, AttackInteractionInfo attackInteractionInfo)
+    {
+        KnockBackBehaviour.KnockBackDirection = ReflectDirection;
+        KnockBackBehaviour.KnockBackGridCount = ReflectAmount;
+        KnockBackBehaviour.KnockBackGridCountPerSec = ReflectSpeed;
 
-
+        FSMTransitionBehaviour.DOFSMTransition(FSMStateID.PUSHED_BACK);
     }
 }

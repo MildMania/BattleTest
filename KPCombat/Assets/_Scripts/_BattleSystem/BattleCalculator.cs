@@ -6,7 +6,12 @@ public static class BattleCalculator
     {
         object message = br;
 
-		CalculateBaseDamage(ref br);
+        CheckIfReflected(ref br);
+
+        if (br.IsDamageReflected)
+            return;
+
+        CalculateBaseDamage(ref br);
 
         if (br.DamageAmount > 0)
             br.IsDamageGiven = true;
@@ -16,4 +21,12 @@ public static class BattleCalculator
 	{
 		br.DamageAmount += br.Attacker.BaseDamage;
 	}
+
+    static void CheckIfReflected(ref BattleResult br)
+    {
+        if (br.Damagable.ReflectedAttackTypeList.Contains(br.Attacker.AttackType))
+            br.IsDamageReflected = true;
+
+        
+    }
 }

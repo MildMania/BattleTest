@@ -24,6 +24,12 @@ public class AnimationBasedMovementBehaviour : MMBehaviour
         return this;
     }
 
+    public void Stop()
+    {
+        if (_moveTween != null)
+            _moveTween.Kill();
+    }
+
     void OnTweenCompleted()
     {
         FireOnComplete();

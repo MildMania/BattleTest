@@ -8,6 +8,7 @@ public class BattleResult
     public DamagableBase Damagable { get; private set; }
 
     public bool IsDamageGiven { get; set; }
+    public bool IsDamageReflected { get; set; }
 
     public float DamageAmount { get; set; }
 

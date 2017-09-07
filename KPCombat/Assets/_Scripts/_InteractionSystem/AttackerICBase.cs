@@ -16,16 +16,22 @@ public class AttackerICBase : InteractionControllerBase
         base.StartListeningEvents();
 
         ((AttackerBase)_targetInteraction).OnDamageGiven += OnDamageGiven;
+        ((AttackerBase)_targetInteraction).OnAttackReflected += OnAttackReflected;
     }
 
     protected override void FinishListeningEvents()
     {
         base.FinishListeningEvents();
 
-        ((AttackerBase)_targetInteraction).OnDamageGiven += OnDamageGiven;
+        ((AttackerBase)_targetInteraction).OnDamageGiven -= OnDamageGiven;
+        ((AttackerBase)_targetInteraction).OnAttackReflected -= OnAttackReflected;
     }
 
     protected virtual void OnDamageGiven(DamagableBase damagable, AttackInteractionInfo attackInteractionInfo)
+    {
+    }
+
+    protected virtual void OnAttackReflected(DamagableBase damagable, AttackInteractionInfo attackInteractionInfo)
     {
     }
 }

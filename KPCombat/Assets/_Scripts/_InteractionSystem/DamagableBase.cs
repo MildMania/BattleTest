@@ -11,6 +11,8 @@ public class DamagableBase : Reaction
 
     public AttackInteractionInfo CurAttackInfo { get; protected set; }
 
+    public List<AttackTypeEnum> ReflectedAttackTypeList;
+
     #region Events
 
     public Action<DamagableBase, AttackInteractionInfo> OnDamageTaken;
@@ -19,6 +21,14 @@ public class DamagableBase : Reaction
     {
         if (OnDamageTaken != null)
             OnDamageTaken(this, CurAttackInfo);
+    }
+
+    public Action<DamagableBase, AttackInteractionInfo> OnAttackReflected;
+
+    void FireOnAttackReflected()
+    {
+        if (OnAttackReflected != null)
+            OnAttackReflected(this, CurAttackInfo);
     }
 
     public Action<DamagableBase, AttackInteractionInfo> OnDamagableSurvived;
@@ -62,33 +72,35 @@ public class DamagableBase : Reaction
     {
         base.React(interaction, interactionInfo);
 
-        TakeDamage();
-    }
-
-    protected void TakeDamage()
-    {
         CurAttackInfo = (AttackInteractionInfo)CurInteractionInfo;
 
-        if (IsDebugEnabled)
-            Debug.Log("<color=red>Damage Taken: " + CurAttackInfo.DamageAmount + "</color>");
-
-
         if (CurAttackInfo.IsDamageGiven)
-			DamageTaken(CurAttackInfo);
+            DamageTaken();
+        else if (CurAttackInfo.IsAttackReflected)
+            AttackReflected();
 
         ReactionCompleted();
     }
 
-    void DamageTaken(AttackInteractionInfo ai)
+    void DamageTaken()
     {
-		Health -= -ai.DamageAmount;
+		Health -= -CurAttackInfo.DamageAmount;
 
         if (Health <= 0)
 	        DamgableDied();
         else
 	        DamagableSurvived();
 
-		FireOnDamageTaken();
+        if (IsDebugEnabled)
+            Debug.Log("<color=red>Damage Taken: " + CurAttackInfo.DamageAmount + "</color>");
+
+        FireOnDamageTaken();
+
+    }
+
+    void AttackReflected()
+    {
+        FireOnAttackReflected();
     }
 
     void DamgableDied()

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyBaseAttackerIC : AttackerICBase
 {
-    public EnemyAttackStateBC AttackStateBC;
-
     public float BaseDamage;
     public float KnockBackAmount;
 

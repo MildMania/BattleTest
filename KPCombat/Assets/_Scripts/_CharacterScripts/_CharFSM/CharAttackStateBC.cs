@@ -38,6 +38,8 @@ public class CharAttackStateBC : FSMBehaviourController
     public AnimationBehaviour Animationbehaviour;
     public AnimationBasedMovementBehaviour MovementBehaviour;
 
+    public CharAttackController AttackController;
+
     public float AttackResetDuration;
 
     public AttackerBase Attacker;
@@ -95,6 +97,8 @@ public class CharAttackStateBC : FSMBehaviourController
         Pushable.IsReactionActive = true;
 
         Attacker.IsInteractionActive = false;
+
+        MovementBehaviour.Stop();
 
         base.Exit();
     }

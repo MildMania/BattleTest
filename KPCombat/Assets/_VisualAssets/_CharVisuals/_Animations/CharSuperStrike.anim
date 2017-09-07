@@ -109,14 +109,14 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_Events:
   - time: 0.53333336
-    functionName: AttackStarted
+    functionName: ActivateInteraction
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.8
-    functionName: AttackFinished
+    functionName: DeactivateInteraction
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

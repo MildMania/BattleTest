@@ -11,8 +11,6 @@ public class InputScheme1 : InputSchemeBase
 
     protected override void OnFingerUpNotOnStartPos(int fingerID, Vector2 inputPos)
     {
-        Debug.Log("finger up on not start pos");
-
         CharacterInputController.Instance.OnChargeReleased();
     }
 

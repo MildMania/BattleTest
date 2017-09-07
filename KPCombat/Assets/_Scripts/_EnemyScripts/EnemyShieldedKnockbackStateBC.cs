@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyKnockBackBC : KnockBackStateBC
+public class EnemyShieldedKnockbackStateBC : KnockBackStateBC
 {
     public AnimationBehaviour AnimBehaviour;
 
     public string KnockBackAnimation { get; set; }
+
+    protected override void InitFSMBC()
+    {
+        StateID = FSMStateID.SHIELDED_KNOCK_BACK;
+    }
 
     public override void Execute()
     {
@@ -17,7 +22,6 @@ public class EnemyKnockBackBC : KnockBackStateBC
 
     void OnKnockBackAnimationCompleted()
     {
-
         FSMTransitionBehaviour.DOFSMTransition(FSMStateID.MOVE);
 
         FireOnExecutionCompleted();

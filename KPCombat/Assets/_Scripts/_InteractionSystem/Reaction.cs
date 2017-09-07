@@ -13,7 +13,7 @@ public abstract class Reaction : MMGameSceneBehaviour
 
     public InteractionInfo CurInteractionInfo { get; private set; }
 
-    public bool IsReactionActive { get; set; }
+    public bool IsReactionActive;
 
     protected List<Interaction> _targetInteractionList;
 

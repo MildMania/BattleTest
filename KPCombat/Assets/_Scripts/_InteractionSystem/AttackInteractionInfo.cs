@@ -26,6 +26,7 @@ public class AttackInteractionInfo : InteractionInfo
         AttackType = br.Attacker.AttackType;
 
         IsDamageGiven = br.IsDamageGiven;
+        IsAttackReflected = br.IsDamageReflected;
         DamageAmount = br.DamageAmount;
 
         KnockBackSpeed = 10.0f;

@@ -28,11 +28,11 @@ public class CharacterInputController : MMGameSceneBehaviour {
 
     void FireOnCharacterInput(CharacterInputType inputType)
     {
+        if (IsDebugEnabled)
+            Debug.Log("<color=green>Input Event Fired: " + inputType + "</color>");
+
         if (OnInput != null)
             OnInput(inputType);
-
-        if(IsDebugEnabled)
-            Debug.Log("<color=green>Input Event Fired: " + inputType + "</color>");
     }
     #endregion
 

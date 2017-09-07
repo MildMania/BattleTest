@@ -19,8 +19,23 @@ public class AttackerBase : Interaction
 
     void FireOnDamageGiven(DamagableBase damagable, AttackInteractionInfo attackInfo)
     {
+        if (IsDebugActive)
+            Debug.Log("<color=green>Damage Given: " + gameObject.name + " interact with: " + damagable.gameObject.name + "</color>");
+
+
         if (OnDamageGiven != null)
             OnDamageGiven(damagable, attackInfo);
+    }
+
+    public Action<DamagableBase, AttackInteractionInfo> OnAttackReflected;
+
+    void FireOnAttackReflected(DamagableBase damagable, AttackInteractionInfo attackInfo)
+    {
+        if (IsDebugActive)
+            Debug.Log("<color=green>Attack Reflected: " + gameObject.name + " interact with: " + damagable.gameObject.name + "</color>");
+
+        if (OnAttackReflected != null)
+            OnAttackReflected(damagable, attackInfo);
     }
 
     #endregion
@@ -76,5 +91,7 @@ public class AttackerBase : Interaction
 
         if (_battleResult.IsDamageGiven)
             FireOnDamageGiven(_battleResult.Damagable, LatestAttackInfo);
+        else if(_battleResult.IsDamageReflected)
+            FireOnAttackReflected(_battleResult.Damagable, LatestAttackInfo);
     }
 }

@@ -15,6 +15,7 @@ public class DamagableICBase : ReactionControllerBase
         base.StartListeningEvents();
 
         ((DamagableBase)_targetReaction).OnDamageTaken += OnDamageTaken;
+        ((DamagableBase)_targetReaction).OnAttackReflected += OnAtackReflected;
         ((DamagableBase)_targetReaction).OnDamagableSurvived += OnDamagableSurvived;
         ((DamagableBase)_targetReaction).OnDamagableDestructed += OnDamagableDestructed;
     }
@@ -24,11 +25,17 @@ public class DamagableICBase : ReactionControllerBase
         base.FinishListeningEvents();
 
         ((DamagableBase)_targetReaction).OnDamageTaken -= OnDamageTaken;
+        ((DamagableBase)_targetReaction).OnAttackReflected -= OnAtackReflected;
         ((DamagableBase)_targetReaction).OnDamagableSurvived -= OnDamagableSurvived;
         ((DamagableBase)_targetReaction).OnDamagableDestructed -= OnDamagableDestructed;
     }
 
     protected virtual void OnDamageTaken(DamagableBase damagable, AttackInteractionInfo attackInfo)
+    {
+
+    }
+
+    protected virtual void OnAtackReflected(DamagableBase damagable, AttackInteractionInfo attackInfo)
     {
 
     }

@@ -74,11 +74,20 @@ public class CharAttackController : MMGameSceneBehaviour
 
         } while (curBattleState != FSMStateID.IDLE);
 
-        Charge();
+        if(CharacterInputController.Instance.IsChargePressed)
+            Charge();
     }
 
     void Charge()
     {
+        ResetAttackQueue();
+
+        if (_processAttackInputRoutine != null)
+        {
+            StopCoroutine(_processAttackInputRoutine);
+            _processAttackInputRoutine = null;
+        }
+
         _isChargeCompleted = false;
 
         FSMController.SetTransition(FSMStateID.MELEE_CHARGE);
@@ -108,10 +117,10 @@ public class CharAttackController : MMGameSceneBehaviour
     {
         FSMStateID curBattleState = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
 
-        if(curBattleState == FSMStateID.MELEE_CHARGE)
-            _queueInputLength = 0;
-
-        _queueInputLength++;
+        if (curBattleState == FSMStateID.MELEE_ATTACK)
+            _queueInputLength++;
+        else
+            _queueInputLength = 1;
 
         if (_queueInputLength > MAX_INPUE_QUEUE_LENGTH)
             _queueInputLength = MAX_INPUE_QUEUE_LENGTH;
@@ -173,5 +182,11 @@ public class CharAttackController : MMGameSceneBehaviour
     void PerformSuperStrike()
     {
         FSMController.SetTransition(FSMStateID.SUPER_STRIKE);
+    }
+
+    void ResetAttackQueue()
+    {
+        AttackBC.ResetAttackInfo();
+        _queueInputLength = 0;
     }
 }
