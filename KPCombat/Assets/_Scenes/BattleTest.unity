@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -978,7 +978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec5cdb44112a0cf4cab4b0828925b15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChargeDuration: 1
+  ChargeDuration: 0.933
   Animationbehaviour: {fileID: 53978113}
 --- !u!1 &318796468
 GameObject:
@@ -1549,7 +1549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FSMTransition: {fileID: 1944047348}
   AnimationBehaviour: {fileID: 1944047350}
-  Attacker: {fileID: 1403318457}
+  Attacker: {fileID: 0}
 --- !u!1 &470199282
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,7 +1667,7 @@ MonoBehaviour:
   FSMTransition: {fileID: 53978114}
   Animationbehaviour: {fileID: 53978113}
   MovementBehaviour: {fileID: 53978115}
-  AttackController: {fileID: 0}
+  AttackController: {fileID: 497167262}
   AttackResetDuration: 0.2
   Attacker: {fileID: 896099076}
   Pusher: {fileID: 411960955}
@@ -4988,7 +4988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b73f5d57ccd8bb45822e8b311cd4c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpriteAnimator: {fileID: 318796469}
+  SpriteAnimator: {fileID: 0}
 --- !u!114 &1944047351
 MonoBehaviour:
   m_ObjectHideFlags: 0

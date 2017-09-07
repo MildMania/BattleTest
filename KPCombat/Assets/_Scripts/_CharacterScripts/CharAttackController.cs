@@ -134,6 +134,8 @@ public class CharAttackController : MMGameSceneBehaviour
 
     IEnumerator ProcessSwingSwordQueue()
     {
+        //Debug.Log("start swing queue");
+
         FSMStateID curBattleState = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
 
         do
@@ -144,6 +146,8 @@ public class CharAttackController : MMGameSceneBehaviour
 
         } while (curBattleState != FSMStateID.MELEE_CHARGE
         && curBattleState != FSMStateID.IDLE);
+
+        //Debug.Log("state: " + curBattleState);
 
         SwingSword();
 
@@ -171,6 +175,8 @@ public class CharAttackController : MMGameSceneBehaviour
 
     void SwingSword()
     {
+        //Debug.Log("swing sword: " + Time.renderedFrameCount);
+
         FSMController.SetTransition(FSMStateID.MELEE_ATTACK);
     }
 

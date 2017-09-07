@@ -99,6 +99,7 @@ public class CharAttackStateBC : FSMBehaviourController
         Attacker.IsInteractionActive = false;
 
         MovementBehaviour.Stop();
+        MovementBehaviour.UnRegisterOnComplete(OnMovementCompleted);
 
         base.Exit();
     }
