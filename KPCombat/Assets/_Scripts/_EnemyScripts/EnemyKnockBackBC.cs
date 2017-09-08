@@ -17,7 +17,6 @@ public class EnemyKnockBackBC : KnockBackStateBC
 
     void OnKnockBackAnimationCompleted()
     {
-
         FSMTransitionBehaviour.DOFSMTransition(FSMStateID.MOVE);
 
         FireOnExecutionCompleted();

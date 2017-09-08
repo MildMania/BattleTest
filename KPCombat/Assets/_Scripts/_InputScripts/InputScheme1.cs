@@ -19,6 +19,11 @@ public class InputScheme1 : InputSchemeBase
         CharacterInputController.Instance.OnAttackReleased();
     }
 
+    protected override void OnUpSwipe()
+    {
+        CharacterInputController.Instance.OnDashPressed();
+    }
+
     /*protected override void OnLeftSwipe()
     {
         CharacterInputController.Instance.OnJumpLeftPressed();

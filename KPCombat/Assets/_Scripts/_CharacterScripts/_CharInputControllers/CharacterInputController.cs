@@ -7,8 +7,8 @@ public enum CharacterInputType
 {
     Charge,
     Attack,
-    ChargeReleased
-
+    ChargeReleased,
+    Dash,
 }
 
 public class CharacterInputController : MMGameSceneBehaviour {
@@ -110,9 +110,7 @@ public class CharacterInputController : MMGameSceneBehaviour {
         if (battleStateID == FSMStateID.MELEE_ATTACK)
             FireOnCharacterInput(CharacterInputType.Attack);
         else
-        {
             FireOnCharacterInput(CharacterInputType.Charge);
-        }
     }
 
     public void OnAttackReleased()
@@ -133,6 +131,11 @@ public class CharacterInputController : MMGameSceneBehaviour {
             FireOnCharacterInput(CharacterInputType.ChargeReleased);
 
         IsChargePressed = false;
+    }
+
+    public void OnDashPressed()
+    {
+        FireOnCharacterInput(CharacterInputType.Dash);
     }
 
     /*public void OnJumpLeftPressed()

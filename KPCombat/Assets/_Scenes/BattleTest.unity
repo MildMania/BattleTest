@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -660,6 +660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InteractionList:
   - {fileID: 896099076}
+  - {fileID: 1420458514}
   IsDebugEnabled: 0
 --- !u!1 &125019916
 GameObject:
@@ -978,7 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec5cdb44112a0cf4cab4b0828925b15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChargeDuration: 0.933
+  ChargeDuration: 0.4
   Animationbehaviour: {fileID: 53978113}
 --- !u!1 &318796468
 GameObject:
@@ -1472,6 +1473,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 497167261}
+  - {fileID: 2118284365}
   m_Father: {fileID: 712758489}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2103,6 +2105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnimBehaviour: {fileID: 1725948434}
   FSMTransitionBehaviour: {fileID: 1725948439}
+  ShieldDamagable: {fileID: 499051746}
+  BaseDamagable: {fileID: 796918324}
 --- !u!1 &611562138
 GameObject:
   m_ObjectHideFlags: 0
@@ -2271,6 +2275,8 @@ Transform:
   - {fileID: 1519915375}
   - {fileID: 969720756}
   - {fileID: 1897716511}
+  - {fileID: 892970942}
+  - {fileID: 1190987628}
   m_Father: {fileID: 200681335}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2568,6 +2574,7 @@ GameObject:
   - component: {fileID: 712758490}
   - component: {fileID: 712758491}
   - component: {fileID: 712758486}
+  - component: {fileID: 712758487}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -2588,6 +2595,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ReferenceAnimator: {fileID: 112879639}
   IsDebugEnabled: 0
+--- !u!114 &712758487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 712758485}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b831edc7d97374fafa4daffff01334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &712758489
 Transform:
   m_ObjectHideFlags: 0
@@ -2683,7 +2701,7 @@ Camera:
   m_GameObject: {fileID: 720773817}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -3002,7 +3020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3969c48e97183446b2d4905fe1f8a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsReactionActiveOnStart: 1
+  IsReactionActiveOnStart: 0
   IsDebugEnabled: 0
   IsReactionActive: 0
   Health: 5
@@ -3158,6 +3176,85 @@ MonoBehaviour:
     BehaviourController: {fileID: 835702853}
   OnStay: []
   OnExit: []
+--- !u!1 &892970941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 892970942}
+  - component: {fileID: 892970943}
+  m_Layer: 0
+  m_Name: DashState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &892970942
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 892970941}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 658667353}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &892970943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 892970941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00479c34977556143aa7e8edbe065bee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DashExitStateBC: {fileID: 1190987629}
+  DashAttackInfo:
+    BaseDamage: 3
+    AnimName: 
+    AttackDirection: 3
+    AttackType: 4
+    KnockBackAmount: 5
+    AnimationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.38107258
+        value: -0.00032389164
+        inSlope: Infinity
+        outSlope: 3.7650738
+        tangentMode: 7
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    MoveDistance: {x: 0, y: 4.5}
+    MovementDuration: 0.4
+  AnimationBehaviour: {fileID: 53978113}
+  MovementBehaviour: {fileID: 53978115}
+  FSMTransitionBehaviour: {fileID: 53978114}
+  DashAttacker: {fileID: 1420458514}
+  Pusher: {fileID: 411960955}
+  Pushable: {fileID: 146775613}
 --- !u!1 &896099071
 GameObject:
   m_ObjectHideFlags: 0
@@ -3396,6 +3493,52 @@ Transform:
   m_Father: {fileID: 447602805}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1190987627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1190987628}
+  - component: {fileID: 1190987629}
+  m_Layer: 0
+  m_Name: DashExitState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1190987628
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1190987627}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 658667353}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1190987629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1190987627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c889a4d9901d2746b22758252f6ee6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimationBehaviour: {fileID: 53978113}
+  MovementBehaviour: {fileID: 53978115}
+  FSMTransitionBehaviour: {fileID: 53978114}
+  DashAttacker: {fileID: 1420458514}
+  Pusher: {fileID: 411960955}
+  Pushable: {fileID: 146775613}
 --- !u!1 &1199253585
 GameObject:
   m_ObjectHideFlags: 0
@@ -3767,6 +3910,7 @@ Transform:
   - {fileID: 756037536}
   - {fileID: 411960952}
   - {fileID: 146775610}
+  - {fileID: 1420458519}
   m_Father: {fileID: 712758489}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4066,6 +4210,132 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!1 &1420458513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1420458519}
+  - component: {fileID: 1420458518}
+  - component: {fileID: 1420458514}
+  - component: {fileID: 1420458517}
+  - component: {fileID: 1420458516}
+  - component: {fileID: 1420458515}
+  m_Layer: 8
+  m_Name: DashAttacker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1420458514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1420458513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54e1dfb068b29841a3095ec3c41de37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsInteractionActiveOnStart: 0
+  InteractWithNewTarget: 1
+  IsDebugActive: 0
+  _isInteractionActive: 0
+--- !u!50 &1420458515
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1420458513}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &1420458516
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1420458513}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.036593676}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.3436923}
+  m_EdgeRadius: 0
+--- !u!114 &1420458517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1420458513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b2280bbd32f5341aa1f7206c311f79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RemoveTargetOnExit: 1
+--- !u!114 &1420458518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1420458513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c0a63a62408d74886215c772b41a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DashStateBC: {fileID: 892970943}
+  DashExitStateBC: {fileID: 1190987629}
+  FSMTransitionBehaviour: {fileID: 53978114}
+  KnockBackBehaviour: {fileID: 53978116}
+  ScreenShakeBehaviour: {fileID: 53978118}
+  DamageGivenReflectAmount: 0.5
+  DamageGivenReflectSpeed: 2
+  ReflectDirection: {x: 0, y: -1}
+  ReflectAmount: 3.5
+  ReflectSpeed: 7
+--- !u!4 &1420458519
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1420458513}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1353838969}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1461955862
 GameObject:
   m_ObjectHideFlags: 0
@@ -4299,8 +4569,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimBehaviour: {fileID: 1725948434}
-  ShieldDamagable: {fileID: 499051746}
-  BaseDamagable: {fileID: 796918324}
 --- !u!1 &1577877494
 GameObject:
   m_ObjectHideFlags: 0
@@ -5216,6 +5484,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2118284364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2118284365}
+  - component: {fileID: 2118284366}
+  m_Layer: 0
+  m_Name: DashController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2118284365
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2118284364}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 427631193}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2118284366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2118284364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33278f140b245e40b46144bf88b3119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FSMController: {fileID: 200681336}
 --- !u!1 &2137650778
 GameObject:
   m_ObjectHideFlags: 0

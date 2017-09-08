@@ -5,4 +5,5 @@ public enum AttackTypeEnum
     Light,
     Heavy,
     SuperStrike,
+    Dash,
 }
