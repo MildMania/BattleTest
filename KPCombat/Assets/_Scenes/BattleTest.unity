@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 112879640}
   - component: {fileID: 112879639}
   - component: {fileID: 112879642}
+  - component: {fileID: 112879643}
   m_Layer: 0
   m_Name: CharVisual
   m_TagString: Untagged
@@ -661,6 +662,21 @@ MonoBehaviour:
   InteractionList:
   - {fileID: 896099076}
   - {fileID: 1420458514}
+  - {fileID: 411960955}
+  IsDebugEnabled: 0
+--- !u!114 &112879643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112879638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b33a10b710ef8984a95f53c867c44cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReactionList:
+  - {fileID: 146775613}
   IsDebugEnabled: 0
 --- !u!1 &125019916
 GameObject:
@@ -1474,6 +1490,7 @@ Transform:
   m_Children:
   - {fileID: 497167261}
   - {fileID: 2118284365}
+  - {fileID: 1246341903}
   m_Father: {fileID: 712758489}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2277,6 +2294,8 @@ Transform:
   - {fileID: 1897716511}
   - {fileID: 892970942}
   - {fileID: 1190987628}
+  - {fileID: 1190345311}
+  - {fileID: 2061141831}
   m_Father: {fileID: 200681335}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3253,8 +3272,6 @@ MonoBehaviour:
   MovementBehaviour: {fileID: 53978115}
   FSMTransitionBehaviour: {fileID: 53978114}
   DashAttacker: {fileID: 1420458514}
-  Pusher: {fileID: 411960955}
-  Pushable: {fileID: 146775613}
 --- !u!1 &896099071
 GameObject:
   m_ObjectHideFlags: 0
@@ -3493,6 +3510,52 @@ Transform:
   m_Father: {fileID: 447602805}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1190345310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1190345311}
+  - component: {fileID: 1190345312}
+  m_Layer: 0
+  m_Name: ShieldUpState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1190345311
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1190345310}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 658667353}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1190345312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1190345310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4322d18b32a5de41a1ff5e19aba5d19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShieldDownBC: {fileID: 2061141832}
+  AnimationBehaviour: {fileID: 53978113}
+  RunBehaviour: {fileID: 53978112}
+  FSMTransitionBehaviour: {fileID: 53978114}
+  ShieldedModeDuration: 0.5
+  ShieldMoveSpeed: 3
 --- !u!1 &1190987627
 GameObject:
   m_ObjectHideFlags: 0
@@ -3690,6 +3753,47 @@ MonoBehaviour:
   KnockBackBehaviour: {fileID: 1944047346}
   FSMTransitionBehaviour: {fileID: 1944047348}
   AnimBehaviour: {fileID: 1944047350}
+--- !u!1 &1246341902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1246341903}
+  - component: {fileID: 1246341904}
+  m_Layer: 0
+  m_Name: ShieldController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1246341903
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1246341902}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 427631193}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1246341904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1246341902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6843c11b8e9a76a4e8dbf17fa983b16d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FSMController: {fileID: 200681336}
 --- !u!1 &1294873599
 GameObject:
   m_ObjectHideFlags: 0
@@ -5440,7 +5544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2055366668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5484,6 +5588,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2061141830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2061141831}
+  - component: {fileID: 2061141832}
+  m_Layer: 0
+  m_Name: ShieldDownState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2061141831
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2061141830}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 658667353}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2061141832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2061141830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4166f31c5f19f4b8a26cb8320b79b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animationbehaviour: {fileID: 53978113}
+  FSMTransitionBehaviour: {fileID: 53978114}
+  RunBehaviour: {fileID: 53978112}
+  ShieldMoveSpeed: 3
 --- !u!1 &2118284364
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,9 +15,6 @@ public class CharDashStateBC : FSMBehaviourController
 
     public AttackerBase DashAttacker;
 
-    public PusherBase Pusher;
-    public PushableBase Pushable;
-
     protected override void InitFSMBC()
     {
         StateID = FSMStateID.DASH;
@@ -25,11 +22,6 @@ public class CharDashStateBC : FSMBehaviourController
 
     public override void Execute()
     {
-        Debug.Break();
-
-        Pusher.IsInteractionActive = false;
-        Pushable.IsReactionActive = false;
-
         AnimationBehaviour.PlayAnimation(Constants.CHAR_DASH_ANIM_STATE);
 
         MovementBehaviour.MovementDuration = DashAttackInfo.MovementDuration;

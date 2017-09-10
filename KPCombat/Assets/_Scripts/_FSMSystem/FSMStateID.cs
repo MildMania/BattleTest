@@ -28,4 +28,6 @@ public enum FSMStateID
 
     DASH,
     DASH_EXIT,
+    
+    SHIELD_DOWN,
 }

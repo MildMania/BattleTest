@@ -9,6 +9,7 @@ public enum CharacterInputType
     Attack,
     ChargeReleased,
     Dash,
+    ShieldUp,
 }
 
 public class CharacterInputController : MMGameSceneBehaviour {
@@ -107,9 +108,9 @@ public class CharacterInputController : MMGameSceneBehaviour {
 
         FSMStateID battleStateID = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
 
-        if (battleStateID == FSMStateID.MELEE_ATTACK)
+        /*if (battleStateID == FSMStateID.MELEE_ATTACK)
             FireOnCharacterInput(CharacterInputType.Attack);
-        else
+        else*/
             FireOnCharacterInput(CharacterInputType.Charge);
     }
 
@@ -117,7 +118,7 @@ public class CharacterInputController : MMGameSceneBehaviour {
     {
         FSMStateID battleStateID = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
 
-        if (battleStateID != FSMStateID.MELEE_ATTACK)
+        //if (battleStateID != FSMStateID.MELEE_ATTACK)
             FireOnCharacterInput(CharacterInputType.Attack);
 
         IsChargePressed = false;
@@ -136,6 +137,11 @@ public class CharacterInputController : MMGameSceneBehaviour {
     public void OnDashPressed()
     {
         FireOnCharacterInput(CharacterInputType.Dash);
+    }
+
+    public void OnShieldUpPressed()
+    {
+        FireOnCharacterInput(CharacterInputType.ShieldUp);
     }
 
     /*public void OnJumpLeftPressed()

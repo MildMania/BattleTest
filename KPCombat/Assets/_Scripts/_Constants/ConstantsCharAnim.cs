@@ -18,4 +18,9 @@ public partial class Constants
     public const string CHAR_SUPER_STRIKE_ANIM_STATE = "Super_Strike";
     public const string CHAR_DASH_ANIM_STATE = "CharDashEnter";
     public const string CHAR_DASH_EXIT_ANIM_STATE = "CharDashExit";
+
+    public const string CHAR_SHIELD_UP_ANIM_STATE = "CharShieldUp";
+    public const string CHAR_SHIELD_DOWN_ANIM_STATE = "CharShieldDown";
+
+
 }
