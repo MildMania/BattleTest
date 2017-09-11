@@ -30,7 +30,7 @@ public class CharacterInputController : MMGameSceneBehaviour {
     void FireOnCharacterInput(CharacterInputType inputType)
     {
         if (IsDebugEnabled)
-            Debug.Log("<color=green>Input Event Fired: " + inputType + "</color>");
+            Debug.Log("<color=green>Input Event Fired: " + inputType + " on time:  "  + Time.realtimeSinceStartup + "</color>");
 
         if (OnInput != null)
             OnInput(inputType);
@@ -136,11 +136,15 @@ public class CharacterInputController : MMGameSceneBehaviour {
 
     public void OnDashPressed()
     {
+        IsChargePressed = false;
+
         FireOnCharacterInput(CharacterInputType.Dash);
     }
 
     public void OnShieldUpPressed()
     {
+        IsChargePressed = false;
+
         FireOnCharacterInput(CharacterInputType.ShieldUp);
     }
 

@@ -13,6 +13,6 @@ public class EnemyBaseAttackerIC : AttackerICBase
 
         AttackerBase attacker = ((AttackerBase)_targetInteraction);
 
-        attacker.SetAttackParameters(BaseDamage, KnockBackAmount, DirectionEnum.Front, AttackTypeEnum.Default);
+        attacker.SetAttackParameters(BaseDamage, KnockBackAmount, DirectionEnum.Front, AttackTypeEnum.Light);
     }
 }

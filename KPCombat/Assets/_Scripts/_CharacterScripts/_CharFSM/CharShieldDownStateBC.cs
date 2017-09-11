@@ -12,6 +12,9 @@ public class CharShieldDownStateBC : FSMBehaviourController
 
     public float ShieldMoveSpeed;
 
+    public DamagableBase BaseDamagable;
+    public DamagableBase ShieldDamagable;
+
     protected override void InitFSMBC()
     {
         StateID = FSMStateID.SHIELD_DOWN;
@@ -36,6 +39,9 @@ public class CharShieldDownStateBC : FSMBehaviourController
     public override void Exit()
     {
         base.Exit();
+
+        BaseDamagable.IsReactionActive = true;
+        ShieldDamagable.IsReactionActive = false;
 
         RunBehaviour.Stop();
 

@@ -7,11 +7,13 @@ public class CharPushedBackStateBC : PushedBackStateBC
     public FSMTransitionBehaviour FSMBehaviour;
     public AnimationBehaviour AnimationBehaviour;
 
+    public string PushBackAnimState { get; set; }
+
     public override void Execute()
     {
         base.Execute();
 
-        AnimationBehaviour.PlayAnimation(Constants.CHAR_KNOCKBACK_ANIM_STATE);
+        AnimationBehaviour.PlayAnimation(PushBackAnimState);
     }
 
     protected override void OnKnockBackCompleted()

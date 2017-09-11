@@ -6,6 +6,8 @@ public class CharDashController : MMGameSceneBehaviour
 {
     public FSMController FSMController;
 
+    public float DashQueueDuration;
+
     IEnumerator _processDashInputRoutine;
 
     protected override void StartListeningGameEvents()
@@ -50,6 +52,8 @@ public class CharDashController : MMGameSceneBehaviour
 
     IEnumerator ProcessDashInputProgress()
     {
+        float lastInputTime = Time.realtimeSinceStartup;
+
         FSMStateID curMovementState = FSMController.GetCurStateIDOfFSM(FSMType.Movement);
 
         do
@@ -60,7 +64,8 @@ public class CharDashController : MMGameSceneBehaviour
 
         } while (curMovementState != FSMStateID.MOVE);
 
-        Dash();
+        if (Time.realtimeSinceStartup - lastInputTime <= DashQueueDuration)
+            Dash();
 
         _processDashInputRoutine = null;
     }

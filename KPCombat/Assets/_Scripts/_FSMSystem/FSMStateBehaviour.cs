@@ -36,6 +36,9 @@ public class FSMStateBehaviour : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (IsDebugEnabled)
+            Debug.Log("on state entered: " + StateID);
+
         FireOnStateEntered();
 
         if (_fsmController == null)

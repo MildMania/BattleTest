@@ -6,6 +6,7 @@ public class CharDashAttackerIC : AttackerICBase
 {
     public CharDashStateBC DashStateBC;
     public CharDashExitStateBC DashExitStateBC;
+    public CharPushedBackStateBC PushedBackStateBC;
 
     public FSMTransitionBehaviour FSMTransitionBehaviour;
     public KnockBackBehaviour KnockBackBehaviour;
@@ -37,6 +38,8 @@ public class CharDashAttackerIC : AttackerICBase
         KnockBackBehaviour.KnockBackDirection = ReflectDirection;
         KnockBackBehaviour.KnockBackGridCount = DamageGivenReflectAmount;
         KnockBackBehaviour.KnockBackGridCountPerSec = DamageGivenReflectSpeed;
+
+        PushedBackStateBC.PushBackAnimState = Constants.CHAR_KNOCKBACK_ANIM_STATE;
 
         DashExitStateBC.NextStateID = FSMStateID.PUSHED_BACK;
 

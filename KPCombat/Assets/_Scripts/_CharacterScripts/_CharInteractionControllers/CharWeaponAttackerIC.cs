@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharWeaponAttackerIC : AttackerICBase
 {
     public CharAttackStateBC AttackStateBC;
+    public CharPushedBackStateBC PushedBackStateBC;
 
     public ScreenShakeBehaviour ScreenShakeBehaviour;
 
@@ -36,6 +37,8 @@ public class CharWeaponAttackerIC : AttackerICBase
         KnockBackBehaviour.KnockBackDirection = ReflectDirection;
         KnockBackBehaviour.KnockBackGridCount = ReflectAmount;
         KnockBackBehaviour.KnockBackGridCountPerSec = ReflectSpeed;
+
+        PushedBackStateBC.PushBackAnimState = Constants.CHAR_KNOCKBACK_ANIM_STATE;
 
         FSMTransitionBehaviour.DOFSMTransition(FSMStateID.PUSHED_BACK);
     }

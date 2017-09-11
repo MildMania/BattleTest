@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PushDirection: {x: 0, y: -1}
-  PushAmount: 1.5
+  PushAmount: 2
   PushSpeed: 7
 --- !u!114 &12359000
 MonoBehaviour:
@@ -677,7 +677,117 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ReactionList:
   - {fileID: 146775613}
+  - {fileID: 1046011256}
+  - {fileID: 756037539}
+  - {fileID: 120618174}
   IsDebugEnabled: 0
+--- !u!1 &120618170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 120618171}
+  - component: {fileID: 120618175}
+  - component: {fileID: 120618174}
+  - component: {fileID: 120618173}
+  - component: {fileID: 120618172}
+  m_Layer: 9
+  m_Name: DashDamagable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &120618171
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 120618170}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1353838969}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &120618172
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 120618170}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &120618173
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 120618170}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.5519104}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.54548645}
+  m_EdgeRadius: 0
+--- !u!114 &120618174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 120618170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3969c48e97183446b2d4905fe1f8a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsReactionActiveOnStart: 0
+  IsDebugEnabled: 0
+  IsReactionActive: 0
+  Health: 100
+  ReflectedAttackTypeList: 
+  AbsorbedAttackTypeList: 000000000100000002000000
+--- !u!114 &120618175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 120618170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7834f1f766a358240bce1eaf8f8c1535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TookDamageStateBC: {fileID: 549726787}
+  FsmTransitionBehaviour: {fileID: 53978114}
 --- !u!1 &125019916
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +861,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1353838969}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &146775611
 Rigidbody2D:
@@ -823,6 +933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f1ebd54fe886e45870068ca2b45876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PushedBackStateBC: {fileID: 969720757}
   FSMBehaviour: {fileID: 53978114}
   KnockBackBehaviour: {fileID: 53978116}
 --- !u!1 &193643131
@@ -1271,7 +1382,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1353838969}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &411960953
 Rigidbody2D:
@@ -1643,6 +1754,7 @@ MonoBehaviour:
   FSMController: {fileID: 200681336}
   AttackBC: {fileID: 498079762}
   ChargeBC: {fileID: 288006050}
+  AttackInputQueueDuration: 0.5
 --- !u!1 &498079760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,6 +1984,7 @@ MonoBehaviour:
   IsReactionActive: 0
   Health: 5
   ReflectedAttackTypeList: 0100000002000000
+  AbsorbedAttackTypeList: 
 --- !u!114 &499051747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2625,6 +2738,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b831edc7d97374fafa4daffff01334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsActive: 0
+  WaitForDashDuration: 0.56
 --- !u!4 &712758489
 Transform:
   m_ObjectHideFlags: 0
@@ -2875,7 +2990,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1353838969}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &756037537
 Rigidbody2D:
@@ -2938,6 +3053,7 @@ MonoBehaviour:
   IsReactionActive: 0
   Health: 100
   ReflectedAttackTypeList: 
+  AbsorbedAttackTypeList: 
 --- !u!114 &756037540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3044,6 +3160,7 @@ MonoBehaviour:
   IsReactionActive: 0
   Health: 5
   ReflectedAttackTypeList: 
+  AbsorbedAttackTypeList: 
 --- !u!114 &796918325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3369,6 +3486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackStateBC: {fileID: 498079762}
+  PushedBackStateBC: {fileID: 969720757}
   ScreenShakeBehaviour: {fileID: 53978118}
   FSMTransitionBehaviour: {fileID: 53978114}
   KnockBackBehaviour: {fileID: 53978116}
@@ -3395,6 +3513,51 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &907083580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 907083581}
+  - component: {fileID: 907083582}
+  m_Layer: 0
+  m_Name: RecoverState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &907083581
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 907083580}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1209864716}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &907083582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 907083580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a27e8aa849778c4e9805772490a8ef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KnockBackGridCount: 3
+  KnockBackGridCountPerSec: 10
+  KnockbackBehaviour: {fileID: 53978116}
+  FSMTransitionBehaviour: {fileID: 53978114}
+  ShakeBehaviour: {fileID: 53978118}
 --- !u!1 &969720755
 GameObject:
   m_ObjectHideFlags: 0
@@ -3510,6 +3673,113 @@ Transform:
   m_Father: {fileID: 447602805}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1046011255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1046011260}
+  - component: {fileID: 1046011259}
+  - component: {fileID: 1046011256}
+  - component: {fileID: 1046011258}
+  - component: {fileID: 1046011257}
+  m_Layer: 9
+  m_Name: ShieldDamagable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1046011256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1046011255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3969c48e97183446b2d4905fe1f8a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsReactionActiveOnStart: 0
+  IsDebugEnabled: 0
+  IsReactionActive: 0
+  Health: 100
+  ReflectedAttackTypeList: 01000000
+  AbsorbedAttackTypeList: 
+--- !u!50 &1046011257
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1046011255}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &1046011258
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1046011255}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.5519104}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.54548645}
+  m_EdgeRadius: 0
+--- !u!114 &1046011259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1046011255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa4ada7d1742db45a240d3ddbf799b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TookDamageStateBC: {fileID: 549726787}
+  FsmTransitionBehaviour: {fileID: 53978114}
+--- !u!4 &1046011260
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1046011255}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1353838969}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1190345310
 GameObject:
   m_ObjectHideFlags: 0
@@ -3600,6 +3870,8 @@ MonoBehaviour:
   MovementBehaviour: {fileID: 53978115}
   FSMTransitionBehaviour: {fileID: 53978114}
   DashAttacker: {fileID: 1420458514}
+  DashDamagable: {fileID: 120618174}
+  BaseDamagable: {fileID: 756037539}
   Pusher: {fileID: 411960955}
   Pushable: {fileID: 146775613}
 --- !u!1 &1199253585
@@ -3676,6 +3948,7 @@ Transform:
   - {fileID: 288006049}
   - {fileID: 549726786}
   - {fileID: 1401890126}
+  - {fileID: 907083581}
   m_Father: {fileID: 200681335}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3794,6 +4067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FSMController: {fileID: 200681336}
+  ShieldQueueDuration: 0.5
 --- !u!1 &1294873599
 GameObject:
   m_ObjectHideFlags: 0
@@ -4011,10 +4285,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 896099072}
-  - {fileID: 756037536}
   - {fileID: 411960952}
   - {fileID: 146775610}
   - {fileID: 1420458519}
+  - {fileID: 756037536}
+  - {fileID: 1046011260}
+  - {fileID: 120618171}
   m_Father: {fileID: 712758489}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4419,6 +4695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DashStateBC: {fileID: 892970943}
   DashExitStateBC: {fileID: 1190987629}
+  PushedBackStateBC: {fileID: 969720757}
   FSMTransitionBehaviour: {fileID: 53978114}
   KnockBackBehaviour: {fileID: 53978116}
   ScreenShakeBehaviour: {fileID: 53978118}
@@ -4438,7 +4715,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1353838969}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1461955862
 GameObject:
@@ -5015,6 +5292,7 @@ MonoBehaviour:
   IsReactionActive: 0
   Health: 5
   ReflectedAttackTypeList: 
+  AbsorbedAttackTypeList: 
 --- !u!114 &1745557269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5376,6 +5654,68 @@ MonoBehaviour:
   - {fileID: 1351010313}
   Duration: 0.11
   Interval: 0.05
+--- !u!1 &1961455017
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1961455020}
+  - component: {fileID: 1961455019}
+  - component: {fileID: 1961455018}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1961455018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1961455017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &1961455019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1961455017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!4 &1961455020
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1961455017}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1980044999
 GameObject:
   m_ObjectHideFlags: 0
@@ -5544,7 +5884,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2055366668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5632,6 +5972,8 @@ MonoBehaviour:
   FSMTransitionBehaviour: {fileID: 53978114}
   RunBehaviour: {fileID: 53978112}
   ShieldMoveSpeed: 3
+  BaseDamagable: {fileID: 756037539}
+  ShieldDamagable: {fileID: 1046011256}
 --- !u!1 &2118284364
 GameObject:
   m_ObjectHideFlags: 0
@@ -5673,6 +6015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FSMController: {fileID: 200681336}
+  DashQueueDuration: 0.5
 --- !u!1 &2137650778
 GameObject:
   m_ObjectHideFlags: 0

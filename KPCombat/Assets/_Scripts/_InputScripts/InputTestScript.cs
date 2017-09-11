@@ -2,10 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputTestScript : MonoBehaviour
+public class InputTestScript : MMGameSceneBehaviour
 {
-    private void Update()
+    public bool IsActive;
+
+    public float WaitForDashDuration;
+
+    protected override void OnGameStarted()
     {
-        CharacterInputController.Instance.OnDashPressed();
+        base.OnGameStarted();
+
+        StartCoroutine(InputTestProgress());
+    }
+
+    IEnumerator InputTestProgress()
+    {
+
+        while (true)
+        {
+            if (IsActive)
+            {
+                CharacterInputController.Instance.OnAttackPressed();
+
+                yield return new WaitForSeconds(0.06f);
+
+                CharacterInputController.Instance.OnAttackReleased();
+
+                yield return new WaitForSeconds(0.1f);
+
+                CharacterInputController.Instance.OnAttackPressed();
+
+                yield return new WaitForSeconds(0.4f);
+
+                CharacterInputController.Instance.OnChargeReleased();
+
+                CharacterInputController.Instance.OnDashPressed();
+
+
+                yield return new WaitForSeconds(1);
+            }
+            else
+                yield return null;
+        }
+
     }
 }

@@ -57,6 +57,9 @@ public class MMSpriteAnimatorBase : MMGameSceneBehaviour
 
     public virtual MMSpriteAnimatorBase PlayAnimation(string stateName)
     {
+        if (IsDebugEnabled)
+            Debug.Log("play anim: " + stateName);
+
         _curReferenceAnimator.OnComplete(this, OnAnimationCompleted);
 
         ResetOnCompleteEvent();

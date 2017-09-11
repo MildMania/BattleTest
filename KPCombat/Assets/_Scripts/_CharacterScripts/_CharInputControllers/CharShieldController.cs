@@ -6,6 +6,8 @@ public class CharShieldController : MMGameSceneBehaviour
 {
     public FSMController FSMController;
 
+    public float ShieldQueueDuration;
+
     IEnumerator _processShieldUpInputRoutine;
 
     protected override void StartListeningGameEvents()
@@ -50,6 +52,8 @@ public class CharShieldController : MMGameSceneBehaviour
 
     IEnumerator ProcessShieldUpInputProgress()
     {
+        float lastInputTime = Time.realtimeSinceStartup;
+
         FSMStateID curMovementState = FSMController.GetCurStateIDOfFSM(FSMType.Movement);
 
         do
@@ -60,7 +64,8 @@ public class CharShieldController : MMGameSceneBehaviour
 
         } while (curMovementState != FSMStateID.MOVE);
 
-        ShieldUp();
+        if (Time.realtimeSinceStartup - lastInputTime <= ShieldQueueDuration)
+            ShieldUp();
 
         _processShieldUpInputRoutine = null;
     }
