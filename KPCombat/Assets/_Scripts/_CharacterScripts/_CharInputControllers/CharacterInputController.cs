@@ -7,8 +7,9 @@ public enum CharacterInputType
 {
     Charge,
     Attack,
-    ChargeReleased
-
+    ChargeReleased,
+    Dash,
+    ShieldUp,
 }
 
 public class CharacterInputController : MMGameSceneBehaviour {
@@ -29,7 +30,7 @@ public class CharacterInputController : MMGameSceneBehaviour {
     void FireOnCharacterInput(CharacterInputType inputType)
     {
         if (IsDebugEnabled)
-            Debug.Log("<color=green>Input Event Fired: " + inputType + "</color>");
+            Debug.Log("<color=green>Input Event Fired: " + inputType + " on time:  "  + Time.realtimeSinceStartup + "</color>");
 
         if (OnInput != null)
             OnInput(inputType);
@@ -109,19 +110,17 @@ public class CharacterInputController : MMGameSceneBehaviour {
 
         FSMStateID battleStateID = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
 
-        if (battleStateID == FSMStateID.MELEE_ATTACK)
+        /*if (battleStateID == FSMStateID.MELEE_ATTACK)
             FireOnCharacterInput(CharacterInputType.Attack);
-        else
-        {
+        else*/
             FireOnCharacterInput(CharacterInputType.Charge);
-        }
     }
 
     public void OnAttackReleased()
     {
         FSMStateID battleStateID = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
 
-        if (battleStateID != FSMStateID.MELEE_ATTACK)
+        //if (battleStateID != FSMStateID.MELEE_ATTACK)
             FireOnCharacterInput(CharacterInputType.Attack);
 
         IsChargePressed = false;
@@ -135,6 +134,20 @@ public class CharacterInputController : MMGameSceneBehaviour {
             FireOnCharacterInput(CharacterInputType.ChargeReleased);
 
         IsChargePressed = false;
+    }
+
+    public void OnDashPressed()
+    {
+        IsChargePressed = false;
+
+        FireOnCharacterInput(CharacterInputType.Dash);
+    }
+
+    public void OnShieldUpPressed()
+    {
+        IsChargePressed = false;
+
+        FireOnCharacterInput(CharacterInputType.ShieldUp);
     }
 
     /*public void OnJumpLeftPressed()

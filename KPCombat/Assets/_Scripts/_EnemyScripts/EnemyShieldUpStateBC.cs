@@ -7,6 +7,9 @@ public class EnemyShieldUpStateBC : FSMBehaviourController
     public AnimationBehaviour AnimBehaviour;
     public FSMTransitionBehaviour FSMTransitionBehaviour;
 
+    public DamagableBase ShieldDamagable;
+    public DamagableBase BaseDamagable;
+
     protected override void InitFSMBC()
     {
         StateID = FSMStateID.SHIELD_UP;
@@ -15,6 +18,9 @@ public class EnemyShieldUpStateBC : FSMBehaviourController
     public override void Execute()
     {
         base.Execute();
+
+        ShieldDamagable.IsReactionActive = true;
+        BaseDamagable.IsReactionActive = false;
 
         AnimBehaviour.PlayAnimation(Constants.ENEMY_SHIELD_UP_ANIM_STATE).OnComplete(OnShieldUpAnimCompleted);
     }

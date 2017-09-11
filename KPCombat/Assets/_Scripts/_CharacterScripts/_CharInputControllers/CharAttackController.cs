@@ -9,6 +9,10 @@ public class CharAttackController : MMGameSceneBehaviour
     public CharAttackStateBC AttackBC;
     public CharChargeStateBC ChargeBC;
 
+    public float AttackInputQueueDuration;
+
+    float _lastAttackInputTime;
+
     const int MAX_INPUE_QUEUE_LENGTH = 3;
     int _queueInputLength;
 
@@ -115,6 +119,8 @@ public class CharAttackController : MMGameSceneBehaviour
 
     void CheckRecordAttackInput()
     {
+        _lastAttackInputTime = Time.realtimeSinceStartup;
+
         FSMStateID curBattleState = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
 
         if (curBattleState == FSMStateID.MELEE_ATTACK)
@@ -134,8 +140,6 @@ public class CharAttackController : MMGameSceneBehaviour
 
     IEnumerator ProcessSwingSwordQueue()
     {
-        //Debug.Log("start swing queue");
-
         FSMStateID curBattleState = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
 
         do
@@ -147,9 +151,8 @@ public class CharAttackController : MMGameSceneBehaviour
         } while (curBattleState != FSMStateID.MELEE_CHARGE
         && curBattleState != FSMStateID.IDLE);
 
-        //Debug.Log("state: " + curBattleState);
-
-        SwingSword();
+        if(Time.realtimeSinceStartup - _lastAttackInputTime <= AttackInputQueueDuration)
+            SwingSword();
 
         _processAttackInputRoutine = null;
     }
@@ -162,7 +165,8 @@ public class CharAttackController : MMGameSceneBehaviour
             || AttackBC.CurAttackInfoIndex == AttackBC.AttackInfoList.Count - 1)
             _queueInputLength = 0;
 
-        if (_queueInputLength > 0)
+        if (_queueInputLength > 0
+            && Time.realtimeSinceStartup - _lastAttackInputTime <= AttackInputQueueDuration)
             SwingSword();
         else
         {

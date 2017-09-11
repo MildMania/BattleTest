@@ -12,6 +12,7 @@ public class DamagableBase : Reaction
     public AttackInteractionInfo CurAttackInfo { get; protected set; }
 
     public List<AttackTypeEnum> ReflectedAttackTypeList;
+    public List<AttackTypeEnum> AbsorbedAttackTypeList;
 
     #region Events
 
@@ -92,7 +93,7 @@ public class DamagableBase : Reaction
 	        DamagableSurvived();
 
         if (IsDebugEnabled)
-            Debug.Log("<color=red>Damage Taken: " + CurAttackInfo.DamageAmount + "</color>");
+            Debug.Log("<color=red>Damage Taken: " + CurAttackInfo.DamageAmount + "on frame: " + Time.renderedFrameCount + "</color>");
 
         FireOnDamageTaken();
 

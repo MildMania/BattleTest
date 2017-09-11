@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharWeaponAttackerIC : AttackerICBase
+public class CharDashAttackerIC : AttackerICBase
 {
-    public CharAttackStateBC AttackStateBC;
+    public CharDashStateBC DashStateBC;
+    public CharDashExitStateBC DashExitStateBC;
     public CharPushedBackStateBC PushedBackStateBC;
-
-    public ScreenShakeBehaviour ScreenShakeBehaviour;
 
     public FSMTransitionBehaviour FSMTransitionBehaviour;
     public KnockBackBehaviour KnockBackBehaviour;
+
+    public ScreenShakeBehaviour ScreenShakeBehaviour;
+
+    public float DamageGivenReflectAmount;
+    public float DamageGivenReflectSpeed;
 
     public Vector2 ReflectDirection;
     public float ReflectAmount;
@@ -20,9 +24,9 @@ public class CharWeaponAttackerIC : AttackerICBase
     {
         base.OnReadyToInteract();
 
-		AttackerBase attacker = ((AttackerBase)_targetInteraction);
+        AttackerBase attacker = ((AttackerBase)_targetInteraction);
 
-        CharAttackInfo attackInfo = AttackStateBC.CurAttackInfo;
+        CharAttackInfo attackInfo = DashStateBC.DashAttackInfo;
 
         attacker.SetAttackParameters(attackInfo.BaseDamage, attackInfo.KnockBackAmount, attackInfo.AttackDirection, attackInfo.AttackType);
     }
@@ -30,6 +34,16 @@ public class CharWeaponAttackerIC : AttackerICBase
     protected override void OnDamageGiven(DamagableBase damagable, AttackInteractionInfo attackInteractionInfo)
     {
         ScreenShakeBehaviour.Shake();
+
+        KnockBackBehaviour.KnockBackDirection = ReflectDirection;
+        KnockBackBehaviour.KnockBackGridCount = DamageGivenReflectAmount;
+        KnockBackBehaviour.KnockBackGridCountPerSec = DamageGivenReflectSpeed;
+
+        PushedBackStateBC.PushBackAnimState = Constants.CHAR_KNOCKBACK_ANIM_STATE;
+
+        DashExitStateBC.NextStateID = FSMStateID.PUSHED_BACK;
+
+        FSMTransitionBehaviour.DOFSMTransition(FSMStateID.DASH_EXIT);
     }
 
     protected override void OnAttackReflected(DamagableBase damagable, AttackInteractionInfo attackInteractionInfo)
@@ -38,8 +52,8 @@ public class CharWeaponAttackerIC : AttackerICBase
         KnockBackBehaviour.KnockBackGridCount = ReflectAmount;
         KnockBackBehaviour.KnockBackGridCountPerSec = ReflectSpeed;
 
-        PushedBackStateBC.PushBackAnimState = Constants.CHAR_KNOCKBACK_ANIM_STATE;
+        DashExitStateBC.NextStateID = FSMStateID.PUSHED_BACK;
 
-        FSMTransitionBehaviour.DOFSMTransition(FSMStateID.PUSHED_BACK);
+        FSMTransitionBehaviour.DOFSMTransition(FSMStateID.DASH_EXIT);
     }
 }

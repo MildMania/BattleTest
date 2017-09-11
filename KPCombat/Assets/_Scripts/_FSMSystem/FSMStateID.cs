@@ -25,4 +25,9 @@ public enum FSMStateID
     SHIELDED_TOOK_DAMAGE,
     SHIELDED_MOVE,
     SHIELDED_KNOCK_BACK,
+
+    DASH,
+    DASH_EXIT,
+    
+    SHIELD_DOWN,
 }

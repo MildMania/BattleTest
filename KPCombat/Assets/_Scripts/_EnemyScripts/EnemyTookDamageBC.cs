@@ -21,7 +21,9 @@ public class EnemyTookDamageBC : TookDamageStateBC
             else if(AttackInteractionInfo.AttackDirection == DirectionEnum.Right)
                 KnockBackBC.KnockBackAnimation = Constants.ENEMY_TOOK_DAMAGE_RIGHT_ANIM_STATE;
         }
-        else if(AttackInteractionInfo.AttackType == AttackTypeEnum.Heavy)
+        else if(AttackInteractionInfo.AttackType == AttackTypeEnum.Heavy
+            || AttackInteractionInfo.AttackType == AttackTypeEnum.Dash
+            || AttackInteractionInfo.AttackType == AttackTypeEnum.SuperStrike)
         {
             KnockBackBC.KnockBackAnimation = Constants.ENEMY_KNOCKBACK_ANIM_STATE;
         }
