@@ -50,6 +50,8 @@ public class CharacterInputController : MMGameSceneBehaviour {
     {
         Instance = null;
 
+        StopCheckInput();
+
         base.OnDestroy();
     }
 

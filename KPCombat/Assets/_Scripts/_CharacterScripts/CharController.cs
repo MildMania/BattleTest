@@ -14,6 +14,13 @@ public class CharController : MMGameSceneBehaviour
         GestureManager.OnFingerUp += StartGameInputGiven;
     }
 
+    protected override void StopListeningEvents()
+    {
+        base.StopListeningEvents();
+
+        GestureManager.OnFingerUp -= StartGameInputGiven;
+    }
+
     void StartGameButtonPressed()
     {
         KeyboardManager.RemoveListener(KeyCode.S, KeyState.Down, StartGameButtonPressed);
