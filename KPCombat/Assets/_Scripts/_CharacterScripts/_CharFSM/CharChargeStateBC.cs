@@ -85,7 +85,5 @@ public class CharChargeStateBC : FSMBehaviourController
         _isChargeCompleted = true;
 
         FireOnChargeCompleted();
-
-        Debug.Log("<color=cyan>Charge Completed!</color>");
     }
 }

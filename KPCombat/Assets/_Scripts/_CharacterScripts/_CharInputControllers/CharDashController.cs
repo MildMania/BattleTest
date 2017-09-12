@@ -60,7 +60,8 @@ public class CharDashController : MMGameSceneBehaviour
         {
             curMovementState = FSMController.GetCurStateIDOfFSM(FSMType.Movement);
 
-            yield return null;
+            if(curMovementState != FSMStateID.MOVE)
+                yield return null;
 
         } while (curMovementState != FSMStateID.MOVE);
 

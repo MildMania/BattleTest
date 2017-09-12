@@ -73,7 +73,8 @@ public class CharShieldController : MMGameSceneBehaviour
         {
             curMovementState = FSMController.GetCurStateIDOfFSM(FSMType.Movement);
 
-            yield return null;
+            if(curMovementState != FSMStateID.MOVE)
+                yield return null;
 
         } while (curMovementState != FSMStateID.MOVE);
 
@@ -121,10 +122,10 @@ public class CharShieldController : MMGameSceneBehaviour
             {
                 curMovementState = FSMController.GetCurStateIDOfFSM(FSMType.Movement);
 
-                yield return null;
+                if(curMovementState != FSMStateID.SHIELD_UP)
+                    yield return null;
             } while (curMovementState != FSMStateID.SHIELD_UP);
         }
-
 
         do
         {

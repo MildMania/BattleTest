@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -774,7 +774,7 @@ MonoBehaviour:
   IsReactionActive: 0
   Health: 100
   ReflectedAttackTypeList: 
-  AbsorbedAttackTypeList: 000000000100000002000000
+  AbsorbedAttackTypeList: 
 --- !u!114 &120618175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7fdd0198241954285f8ff62b796f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDebugEnabled: 1
+  IsDebugEnabled: 0
 --- !u!1 &259263729
 GameObject:
   m_ObjectHideFlags: 0
@@ -2851,7 +2851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActive: 0
-  WaitForDashDuration: 0.56
+  WaitForDashDuration: 0
 --- !u!4 &712758489
 Transform:
   m_ObjectHideFlags: 0
@@ -2895,7 +2895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FSMController: {fileID: 200681336}
   IsChargePressed: 0
-  IsDebugEnabled: 1
+  IsDebugEnabled: 0
 --- !u!1 &720773817
 GameObject:
   m_ObjectHideFlags: 0
@@ -6200,7 +6200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2055366668
 MonoBehaviour:
   m_ObjectHideFlags: 0

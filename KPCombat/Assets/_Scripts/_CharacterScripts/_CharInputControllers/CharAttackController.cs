@@ -74,7 +74,8 @@ public class CharAttackController : MMGameSceneBehaviour
         {
             curBattleState = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
 
-            yield return null;
+            if(curBattleState != FSMStateID.IDLE)
+                yield return null;
 
         } while (curBattleState != FSMStateID.IDLE);
 
@@ -149,6 +150,8 @@ public class CharAttackController : MMGameSceneBehaviour
         {
             curBattleState = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
 
+            if(curBattleState != FSMStateID.MELEE_CHARGE 
+                && curBattleState != FSMStateID.IDLE)
             yield return null;
 
         } while (curBattleState != FSMStateID.MELEE_CHARGE
