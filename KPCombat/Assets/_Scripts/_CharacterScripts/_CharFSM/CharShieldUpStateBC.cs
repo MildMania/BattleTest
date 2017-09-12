@@ -10,10 +10,14 @@ public class CharShieldUpStateBC : FSMBehaviourController
     public RunBehaviour RunBehaviour;
     public FSMTransitionBehaviour FSMTransitionBehaviour;
 
-    public float ShieldedModeDuration;
+    public float MaxShieldedModeDuration;
+    public float MinShieldedModeDuration;
+
     public float ShieldMoveSpeed;
 
-    IEnumerator _shieldedModeRoutine;
+    public float CurShieldedModeDuration { get; private set; }
+
+    IEnumerator _waitForAuroShieldDownRoutine;
 
     protected override void InitFSMBC()
     {
@@ -22,47 +26,49 @@ public class CharShieldUpStateBC : FSMBehaviourController
 
     public override void Execute()
     {
-        StartShieldedModeProgress();
-    }
-
-    void StartShieldedModeProgress()
-    {
-        StopShieldedModeProgress();
-
-        _shieldedModeRoutine = ShieldedModeProgress();
-        StartCoroutine(_shieldedModeRoutine);
-    }
-
-    void StopShieldedModeProgress()
-    {
-        if (_shieldedModeRoutine != null)
-            StopCoroutine(_shieldedModeRoutine);
-    }
-
-    IEnumerator ShieldedModeProgress()
-    {
         RunBehaviour.RunSpeed = ShieldMoveSpeed;
 
         RunBehaviour.StartMovement();
 
         AnimationBehaviour.PlayAnimation(Constants.CHAR_SHIELD_UP_ANIM_STATE);
 
-        yield return new WaitForSeconds(ShieldedModeDuration);
-
-        OnShieldedModeFinished();
+        StartWaitForAutoShieldDownProgress();
     }
 
-    void OnShieldedModeFinished()
+    void StartWaitForAutoShieldDownProgress()
     {
+        StopWaitForAutoShieldDownProgress();
+
+        _waitForAuroShieldDownRoutine = WaitForAutoShieldDownProgress();
+        StartCoroutine(_waitForAuroShieldDownRoutine);
+    }
+
+    void StopWaitForAutoShieldDownProgress()
+    {
+        if (_waitForAuroShieldDownRoutine != null)
+            StopCoroutine(_waitForAuroShieldDownRoutine);
+    }
+
+    IEnumerator WaitForAutoShieldDownProgress()
+    {
+        CurShieldedModeDuration = 0;
+
+        do
+        {
+            CurShieldedModeDuration += Time.deltaTime;
+
+            yield return null;
+        } while (CurShieldedModeDuration <= MaxShieldedModeDuration);
+
         ShieldDownBC.NextStateID = FSMStateID.MOVE;
 
         FSMTransitionBehaviour.DOFSMTransition(FSMStateID.SHIELD_DOWN);
-
-        FireOnExecutionCompleted();
     }
 
     public override void Exit()
     {
+        StopWaitForAutoShieldDownProgress();
+
         RunBehaviour.Stop();
 
         base.Exit();

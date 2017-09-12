@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharRecoverStateBC : FSMBehaviourController
 {
+    public CharShieldDownStateBC ShieldDownBC;
+
     public float KnockBackGridCount;
     public float KnockBackGridCountPerSec;
 
@@ -29,6 +31,10 @@ public class CharRecoverStateBC : FSMBehaviourController
     protected virtual void OnKnockBackCompleted()
     {
         FireOnExecutionCompleted();
+
+        ShieldDownBC.NextStateID = FSMStateID.MOVE;
+
+        FSMTransitionBehaviour.DOFSMTransition(FSMStateID.SHIELD_DOWN);
     }
 
     public override void Exit()
@@ -36,7 +42,5 @@ public class CharRecoverStateBC : FSMBehaviourController
         base.Exit();
 
         KnockbackBehaviour.UnRegisterOnComplete(OnKnockBackCompleted);
-
-        FSMTransitionBehaviour.DOFSMTransition(FSMStateID.SHIELD_DOWN);
     }
 }

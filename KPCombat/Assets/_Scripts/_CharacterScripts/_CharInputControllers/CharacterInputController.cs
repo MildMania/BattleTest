@@ -5,11 +5,12 @@ using System;
 
 public enum CharacterInputType
 {
-    Charge,
+    ChargeStarted,
     Attack,
     ChargeReleased,
     Dash,
     ShieldUp,
+    ShieldDown,
 }
 
 public class CharacterInputController : MMGameSceneBehaviour {
@@ -36,7 +37,6 @@ public class CharacterInputController : MMGameSceneBehaviour {
             OnInput(inputType);
     }
     #endregion
-
 
     protected override void Awake()
     {
@@ -91,7 +91,7 @@ public class CharacterInputController : MMGameSceneBehaviour {
     {
         base.StartListeningGameEvents();
 
-        KeyboardManager.AddListener(KeyCode.A, KeyState.Down, OnAttackPressed);
+        KeyboardManager.AddListener(KeyCode.A, KeyState.Down, OnChargePressed);
         KeyboardManager.AddListener(KeyCode.A, KeyState.Up, OnAttackReleased);
     }
 
@@ -99,41 +99,30 @@ public class CharacterInputController : MMGameSceneBehaviour {
     {
         base.StopListeningGameEvents();
 
-        KeyboardManager.RemoveListener(KeyCode.A, KeyState.Down, OnAttackPressed);
+        KeyboardManager.RemoveListener(KeyCode.A, KeyState.Down, OnChargePressed);
         KeyboardManager.RemoveListener(KeyCode.A, KeyState.Up, OnAttackReleased);
 
     }
 
-    public void OnAttackPressed()
+    public void OnChargePressed()
     {
         IsChargePressed = true;
 
-        FSMStateID battleStateID = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
-
-        /*if (battleStateID == FSMStateID.MELEE_ATTACK)
-            FireOnCharacterInput(CharacterInputType.Attack);
-        else*/
-            FireOnCharacterInput(CharacterInputType.Charge);
+        FireOnCharacterInput(CharacterInputType.ChargeStarted);
     }
 
     public void OnAttackReleased()
     {
-        FSMStateID battleStateID = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
-
-        //if (battleStateID != FSMStateID.MELEE_ATTACK)
-            FireOnCharacterInput(CharacterInputType.Attack);
-
         IsChargePressed = false;
+
+        FireOnCharacterInput(CharacterInputType.Attack);
     }
 
     public void OnChargeReleased()
     {
-        FSMStateID battleStateID = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
-
-        if (battleStateID == FSMStateID.MELEE_CHARGE)
-            FireOnCharacterInput(CharacterInputType.ChargeReleased);
-
         IsChargePressed = false;
+
+        FireOnCharacterInput(CharacterInputType.ChargeReleased);
     }
 
     public void OnDashPressed()
@@ -148,6 +137,13 @@ public class CharacterInputController : MMGameSceneBehaviour {
         IsChargePressed = false;
 
         FireOnCharacterInput(CharacterInputType.ShieldUp);
+    }
+
+    public void OnShieldDownPressed()
+    {
+        IsChargePressed = false;
+
+        FireOnCharacterInput(CharacterInputType.ShieldDown);
     }
 
     /*public void OnJumpLeftPressed()

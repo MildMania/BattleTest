@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class CharShieldController : MMGameSceneBehaviour
 {
+    public CharShieldUpStateBC ShieldUpStateBC;
+    public CharShieldDownStateBC ShieldDownStateBC;
+
+
     public FSMController FSMController;
 
     public float ShieldQueueDuration;
 
     IEnumerator _processShieldUpInputRoutine;
+    IEnumerator _processShieldDownInputRoutine;
+
+    bool _hasShieldUpInputQueued;
 
     protected override void StartListeningGameEvents()
     {
@@ -28,6 +35,8 @@ public class CharShieldController : MMGameSceneBehaviour
     {
         if (inputType == CharacterInputType.ShieldUp)
             CheckShieldUpInput();
+        else if (inputType == CharacterInputType.ShieldDown)
+            CheckShieldDownInput();
     }
 
     void CheckShieldUpInput()
@@ -40,6 +49,8 @@ public class CharShieldController : MMGameSceneBehaviour
     {
         if (_processShieldUpInputRoutine != null)
             StopCoroutine(_processShieldUpInputRoutine);
+
+        _hasShieldUpInputQueued = false;
     }
 
     void StartProcessShieldUpInputProgress()
@@ -52,6 +63,8 @@ public class CharShieldController : MMGameSceneBehaviour
 
     IEnumerator ProcessShieldUpInputProgress()
     {
+        _hasShieldUpInputQueued = true;
+
         float lastInputTime = Time.realtimeSinceStartup;
 
         FSMStateID curMovementState = FSMController.GetCurStateIDOfFSM(FSMType.Movement);
@@ -67,11 +80,72 @@ public class CharShieldController : MMGameSceneBehaviour
         if (Time.realtimeSinceStartup - lastInputTime <= ShieldQueueDuration)
             ShieldUp();
 
+        _hasShieldUpInputQueued = false;
+
         _processShieldUpInputRoutine = null;
+    }
+
+
+    void CheckShieldDownInput()
+    {
+        FSMStateID curMovementState = FSMController.GetCurStateIDOfFSM(FSMType.Movement);
+
+        if (curMovementState != FSMStateID.SHIELD_UP 
+            && !_hasShieldUpInputQueued)
+            return;
+
+        StartProcessShieldDownInputProgress();
+    }
+
+    void StartProcessShieldDownInputProgress()
+    {
+        StopProcessShieldDownInputProgress();
+
+        _processShieldDownInputRoutine = ProcessShieldDownInputProgress();
+        StartCoroutine(_processShieldDownInputRoutine);
+    }
+
+    void StopProcessShieldDownInputProgress()
+    {
+        if (_processShieldDownInputRoutine != null)
+            StopCoroutine(_processShieldDownInputRoutine);
+    }
+
+    IEnumerator ProcessShieldDownInputProgress()
+    {
+        FSMStateID curMovementState = FSMController.GetCurStateIDOfFSM(FSMType.Movement);
+
+        if (_hasShieldUpInputQueued)
+        {
+            do
+            {
+                curMovementState = FSMController.GetCurStateIDOfFSM(FSMType.Movement);
+
+                yield return null;
+            } while (curMovementState != FSMStateID.SHIELD_UP);
+        }
+
+
+        do
+        {
+            yield return null;
+        } while (ShieldUpStateBC.CurShieldedModeDuration < ShieldUpStateBC.MinShieldedModeDuration);
+
+        curMovementState = FSMController.GetCurStateIDOfFSM(FSMType.Movement);
+
+        if (curMovementState == FSMStateID.SHIELD_UP)
+            ShieldDown();
     }
 
     void ShieldUp()
     {
         FSMController.SetTransition(FSMStateID.SHIELD_UP);
+    }
+
+    void ShieldDown()
+    {
+        ShieldDownStateBC.NextStateID = FSMStateID.MOVE;
+
+        FSMController.SetTransition(FSMStateID.SHIELD_DOWN);
     }
 }

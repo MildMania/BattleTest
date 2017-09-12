@@ -22,7 +22,7 @@ public class InputTestScript : MMGameSceneBehaviour
         {
             if (IsActive)
             {
-                CharacterInputController.Instance.OnAttackPressed();
+                CharacterInputController.Instance.OnChargePressed();
 
                 yield return new WaitForSeconds(0.06f);
 
@@ -30,7 +30,7 @@ public class InputTestScript : MMGameSceneBehaviour
 
                 yield return new WaitForSeconds(0.1f);
 
-                CharacterInputController.Instance.OnAttackPressed();
+                CharacterInputController.Instance.OnChargePressed();
 
                 yield return new WaitForSeconds(0.4f);
 

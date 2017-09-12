@@ -62,12 +62,13 @@ public class CharChargeStateBC : FSMBehaviourController
 
     public override void Exit()
     {
-        if (!_isChargeCompleted)
-            FireOnChargeInterrupted();
+        FireOnChargeInterrupted();
 
         _isChargeCompleted = false;
 
         StopWaitForChargeProgress();
+
+        CharacterInputController.Instance.IsChargePressed = false;
 
         base.Exit();
     }

@@ -44,7 +44,7 @@ public class CharAttackController : MMGameSceneBehaviour
 
     void OnInput(CharacterInputType inputType)
     {
-        if (inputType == CharacterInputType.Charge)
+        if (inputType == CharacterInputType.ChargeStarted)
             CheckChargeInput();
         else if(inputType == CharacterInputType.ChargeReleased)
             CheckChargeReleasedInput();
@@ -109,7 +109,10 @@ public class CharAttackController : MMGameSceneBehaviour
 
     void CheckChargeReleasedInput()
     {
-        ReleaseCharge();
+        FSMStateID curBattleState = FSMController.GetCurStateIDOfFSM(FSMType.Battle);
+
+        if(curBattleState == FSMStateID.MELEE_CHARGE)
+            ReleaseCharge();
     }
 
     void ReleaseCharge()

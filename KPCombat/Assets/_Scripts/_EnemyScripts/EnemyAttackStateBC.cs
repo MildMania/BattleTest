@@ -9,6 +9,9 @@ public class EnemyAttackStateBC : FSMBehaviourController
 
     public AttackerBase Attacker;
 
+    public PusherBase Pusher;
+    public PushableBase Pushable;
+
     protected override void InitFSMBC()
     {
         StateID = FSMStateID.MELEE_ATTACK;
@@ -31,6 +34,9 @@ public class EnemyAttackStateBC : FSMBehaviourController
     public override void Exit()
     {
         Attacker.IsInteractionActive = false;
+
+        Pusher.IsInteractionActive = true;
+        Pushable.IsReactionActive = true;
 
         AnimationBehaviour.UnRegisterOnComplete(OnAnimationCompleted);
 

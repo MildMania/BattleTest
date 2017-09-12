@@ -6,12 +6,13 @@ public class InputScheme1 : InputSchemeBase
 {
     protected override void OnFingerDown(int fingerID, Vector2 inputPos)
     {
-        CharacterInputController.Instance.OnAttackPressed();
+        CharacterInputController.Instance.OnChargePressed();
     }
 
     protected override void OnFingerUpNotOnStartPos(int fingerID, Vector2 inputPos)
     {
         CharacterInputController.Instance.OnChargeReleased();
+        CharacterInputController.Instance.OnShieldDownPressed();
     }
 
     protected override void OnFingerUpOnStartPos(int fingerID, Vector2 inputPos)
