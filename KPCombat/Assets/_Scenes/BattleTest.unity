@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1756,7 +1756,7 @@ MonoBehaviour:
   FSMController: {fileID: 200681336}
   AttackBC: {fileID: 498079762}
   ChargeBC: {fileID: 288006050}
-  AttackInputQueueDuration: 0.5
+  AttackInputQueueDuration: 0.2
 --- !u!1 &498079760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1801,7 +1801,7 @@ MonoBehaviour:
   Animationbehaviour: {fileID: 53978113}
   MovementBehaviour: {fileID: 53978115}
   AttackController: {fileID: 497167262}
-  AttackResetDuration: 0.2
+  AttackResetDuration: 1
   Attacker: {fileID: 896099076}
   Pusher: {fileID: 411960955}
   Pushable: {fileID: 146775613}
@@ -3940,6 +3940,8 @@ MonoBehaviour:
   MaxShieldedModeDuration: 2
   MinShieldedModeDuration: 0.5
   ShieldMoveSpeed: 3
+  BaseDamagable: {fileID: 756037539}
+  ShieldDamagable: {fileID: 1046011256}
 --- !u!1 &1190987627
 GameObject:
   m_ObjectHideFlags: 0
@@ -4077,7 +4079,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: fb6688c1b96f9d04fb320753b677c576, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 

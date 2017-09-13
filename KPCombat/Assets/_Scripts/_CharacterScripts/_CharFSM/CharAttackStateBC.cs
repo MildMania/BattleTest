@@ -28,8 +28,6 @@ public class CharAttackStateBC : FSMBehaviourController
     {
         if (OnAttackFinished != null)
             OnAttackFinished();
-
-        //Debug.Log("<color=green>Attack Completed</color>");
     }
 
     #endregion

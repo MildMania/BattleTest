@@ -185,8 +185,6 @@ public class CharAttackController : MMGameSceneBehaviour
 
     void SwingSword()
     {
-        //Debug.Log("swing sword: " + Time.renderedFrameCount);
-
         FSMController.SetTransition(FSMStateID.MELEE_ATTACK);
     }
 

@@ -7,10 +7,10 @@ public class FSMController : MonoBehaviour
 {
     public bool IsDebugEnabled;
 
+    public FSMStateID TransitionID { get; private set; }
+
     List<MMFSM> _fsmList;
     List<FSMTransitionChecker> _transitionCheckerList;
-
-    FSMStateID _transitionID;
 
     void Awake()
     {
@@ -41,7 +41,7 @@ public class FSMController : MonoBehaviour
 
     public void SetTransition(FSMStateID stateID)
     {
-        _transitionID = stateID;
+        TransitionID = stateID;
 
         CheckTransition();
 
@@ -51,7 +51,7 @@ public class FSMController : MonoBehaviour
     {
         try
         {
-            FSMTransitionChecker checker = _transitionCheckerList.Single(val => val.StateID == _transitionID);
+            FSMTransitionChecker checker = _transitionCheckerList.Single(val => val.StateID == TransitionID);
 
             checker.CheckCondition(OnCheckFinished);
         }
@@ -70,10 +70,9 @@ public class FSMController : MonoBehaviour
     void TriggerTransition()
     {
         if (IsDebugEnabled)
-            Debug.Log("<color=magenta>transition triggered: " + _transitionID + " frame: " + Time.renderedFrameCount + "</color>");
+            Debug.Log("<color=magenta>transition triggered: " + TransitionID + " frame: " + Time.renderedFrameCount + "</color>");
 
-        _fsmList.ForEach(val => val.SetTransition(_transitionID));
-
+        _fsmList.ForEach(val => val.SetTransition(TransitionID));
     }
 
     public MMFSM GetFSMOfType(FSMType type)

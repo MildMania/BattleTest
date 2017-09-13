@@ -45,6 +45,8 @@ public class MMFSM : MonoBehaviour
 
     IEnumerator _resetTriggerRoutine;
 
+    float _lastTriggerFrame;
+
     #region Events
 
     public event Action<FSMStateID> OnStateChanged;
@@ -163,10 +165,25 @@ public class MMFSM : MonoBehaviour
     void TriggerTransition()
     {
         if (!FSMAnimator.ContainsParam(_transitionID.ToString()))
+        {
+            _lastTriggerFrame = Time.frameCount;
+
             return;
+        }
 
         FSMAnimator.SetTrigger(_transitionID.ToString());
+
+        if(_lastTriggerFrame == Time.frameCount)
+        {
+            FSMAnimator.Update(0);
+
+            if (FSMAnimator.ContainsParam(_transitionID.ToString()))
+                FSMAnimator.ResetTrigger(_transitionID.ToString());
+        }
+
+        _lastTriggerFrame = Time.frameCount;
     }
+
 
     void StartResetTriggerProgress()
     {

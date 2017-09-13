@@ -10,9 +10,11 @@ public class FSMStateBehaviour : StateMachineBehaviour
 
     public bool IsDebugEnabled;
 
-
     FSMController _fsmController;
     FSMBehaviourController _bc;
+
+    float _lastEnteredFrame;
+    float _lastExitedFrame;
 
     #region Events
 
@@ -36,8 +38,18 @@ public class FSMStateBehaviour : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        /*if (_lastEnteredFrame == Time.frameCount)
+        {
+            if(IsDebugEnabled)
+                Debug.Log("tried to enter, failed: " + _lastEnteredFrame);
+
+            return;
+        }*/
+
+        _lastEnteredFrame = Time.frameCount;
+
         if (IsDebugEnabled)
-            Debug.Log("on state entered: " + StateID);
+            Debug.Log("on state entered: " + StateID + " " + _lastEnteredFrame);
 
         FireOnStateEntered();
 
@@ -53,8 +65,13 @@ public class FSMStateBehaviour : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (IsDebugEnabled)
-            Debug.Log("on state exit: " + StateID);
+        /*if (_lastExitedFrame == Time.frameCount)
+            return;*/
+
+        _lastExitedFrame = Time.frameCount;
+
+        /*if (IsDebugEnabled)
+            Debug.Log("on state exit: " + StateID);*/
 
         FireOnStateExited();
 

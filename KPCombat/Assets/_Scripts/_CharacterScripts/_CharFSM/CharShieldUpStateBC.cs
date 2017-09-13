@@ -15,6 +15,9 @@ public class CharShieldUpStateBC : FSMBehaviourController
 
     public float ShieldMoveSpeed;
 
+    public DamagableBase BaseDamagable;
+    public DamagableBase ShieldDamagable;
+
     public float CurShieldedModeDuration { get; private set; }
 
     IEnumerator _waitForAuroShieldDownRoutine;
@@ -67,6 +70,14 @@ public class CharShieldUpStateBC : FSMBehaviourController
 
     public override void Exit()
     {
+        if (FSMTransitionBehaviour.TransitionID != FSMStateID.SHIELD_DOWN)
+        {
+            Debug.Log("buraya geldiiii");
+
+            BaseDamagable.IsReactionActive = true;
+            ShieldDamagable.IsReactionActive = false;
+        }
+
         StopWaitForAutoShieldDownProgress();
 
         RunBehaviour.Stop();
